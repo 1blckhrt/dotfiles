@@ -11,7 +11,7 @@ sudo apt install git
 ## Sources/references
 
 - ChatGPT
-- [Rofi Sound Switcher](<[https://github.com/joshpetit/rofi-mixer?tab=readme-ov-file](README.md)>)
+- [Rofi Sound Switcher]([https://github.com/joshpetit/rofi-mixer?tab=readme-ov-file)
 - [My previous dotfiles](https://github.com/1blckhrt/blckhrt-dotfiles)
 - [References of previous dotfiles](https://github.com/DarkReaper231/eternalblack?tab=readme-ov-file)
 - [Matt Kijowski's install script](https://github.com/mkijowski/dotfiles/blob/master/install.sh)
