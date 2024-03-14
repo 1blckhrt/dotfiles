@@ -58,7 +58,7 @@ install_main_packages() {
 }
 export -f install_main_packages
 
-main() {
+sudo() {
 	check_system
 	install_main_packages
 }
@@ -74,5 +74,5 @@ non_sudo() {
 }
 export -f non_sudo
 
-main
+sudo
 su "$SUDO_USER" -c "non_sudo"
