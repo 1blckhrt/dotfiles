@@ -111,6 +111,7 @@ non_sudo() {
     bash ~/dotfiles/sub-i3-install-scripts/move_picom.sh
     bash ~/dotfiles/sub-i3-install-scripts/move_polybar.sh
     bash ~/dotfiles/sub-i3-install-scripts/move_rofi.sh
+    bash ~/dotfiles/sub-i3-install-scripts/move_wallpaper.sh
 }
 export -f non_sudo
 
