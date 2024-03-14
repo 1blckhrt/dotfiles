@@ -1,3 +1,5 @@
+#!/bin/bash
+
 install_i3lock-color() {
     echo -e '[INFO] Installing i3lock-color...'
 

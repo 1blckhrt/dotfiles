@@ -1,3 +1,5 @@
+#!/bin/bash
+
 install_pkg() {
     echo -e '[INFO] Updating and upgrading system...'
     apt update && apt upgrade -y

@@ -1,3 +1,5 @@
+#!/bin/bash
+
 move_i3_files() {
     echo -e '[INFO] Moving i3 files...'
     ln -sfb ~/dotfiles/config-files/i3/bar ~/.config/i3/bar

@@ -1,3 +1,5 @@
+#!/bin/bash
+
 move_i3_scripts() {
     echo -e '[INFO] Moving i3 scripts...'
     ln -sfb ~/dotfiles/i3-scripts/battery ~/Documents/Scripts/battery

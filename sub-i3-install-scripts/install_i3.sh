@@ -1,3 +1,5 @@
+#!/bin/bash
+
 install_i3() {
     echo -e '[INFO] Installing i3...'
     /usr/lib/apt/apt-helper download-file https://debian.sur5r.net/i3/pool/main/s/sur5r-keyring/sur5r-keyring_2023.02.18_all.deb keyring.deb SHA256:a511ac5f10cd811f8a4ca44d665f2fa1add7a9f09bef238cdfad8461f5239cc4
