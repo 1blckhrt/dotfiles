@@ -112,4 +112,6 @@ non_sudo() {
     bash ~/dotfiles/sub-i3-install-scripts/move_polybar.sh
     bash ~/dotfiles/sub-i3-install-scripts/move_rofi.sh
 }
+export -f non_sudo
+
 su "$SUDO_USER" -c "non_sudo"
