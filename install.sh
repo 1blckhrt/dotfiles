@@ -65,7 +65,7 @@ main() {
 
 non_sudo() {
 	chmod -R +x ~/dotfiles/sub-install-scripts/
-	# ./aws.sh
+	# bash ~/dotfiles/sub-install-scripts/aws.sh
 	bash ~/dotfiles/sub-install-scripts/git.sh
 	bash ~/dotfiles/sub-install-scripts/ssh.sh
 	bash ~/dotfiles/sub-install-scripts/miniconda.sh
