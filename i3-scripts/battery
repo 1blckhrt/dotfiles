@@ -1,0 +1,37 @@
+#!/bin/bash
+
+# Function to get battery level
+get_battery_level() {
+    cat /sys/class/power_supply/BAT0/capacity
+}
+
+# Function to get battery status (charging, discharging, etc.)
+get_battery_status() {
+    cat /sys/class/power_supply/BAT0/status
+}
+
+# Function to display battery icon based on level
+print_battery_icon() {
+    local battery_level=$(get_battery_level)
+    local battery_status=$(get_battery_status)
+    local icon=""
+
+    # Determine the icon based on battery level and status
+    if [ "$battery_status" == "Charging" ]; then
+        icon="⚡" # Icon for charging
+    elif [ "$battery_level" -ge 80 ]; then
+        icon="" # Icon for high battery level
+    elif [ "$battery_level" -ge 50 ]; then
+        icon="" # Icon for medium battery level
+    elif [ "$battery_level" -ge 20 ]; then
+        icon="" # Icon for low battery level
+    else
+        icon="" # Icon for very low battery level
+    fi
+
+    echo "%{F#8A2BE2}$icon $battery_level%{F-}"
+}
+
+# Print the battery icon and level
+print_battery_icon
+

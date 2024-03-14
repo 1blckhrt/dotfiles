@@ -1,0 +1,26 @@
+[global]
+font = Monospace 10
+format = "<b>%s</b>\n%s"
+sort = yes
+indicate_hidden = yes
+stack_duplicates = true
+hide_duplicate_count = true
+show_age_threshold = 60
+geometry = "300x5-20+20"  # Example geometry settings
+
+[shortcuts]
+close = ctrl+space
+close_all = ctrl+shift+space
+history = ctrl+grave
+
+[urgency_low]
+background = "#000000"
+foreground = "#8A2BE2"  # Purple foreground
+
+[urgency_normal]
+background = "#000000"
+foreground = "#8A2BE2"  # Purple foreground
+
+[urgency_critical]
+background = "#000000"
+foreground = "#8A2BE2"  # Purple foreground

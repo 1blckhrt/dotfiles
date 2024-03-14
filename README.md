@@ -11,7 +11,6 @@ sudo apt install git
 ## Sources/references
 
 - ChatGPT
-- [Rofi Sound Switcher](https://github.com/joshpetit/rofi-mixer?tab=readme-ov-file)
 - [My previous dotfiles](https://github.com/1blckhrt/blckhrt-dotfiles)
 - [References of previous dotfiles](https://github.com/DarkReaper231/eternalblack?tab=readme-ov-file)
 - [Matt Kijowski's install script](https://github.com/mkijowski/dotfiles/blob/master/install.sh)
@@ -21,3 +20,6 @@ sudo apt install git
 - [Git Autocorrect](https://andycarter.dev/blog/auto-correct-git-commands)
 - [Bash Aliases](https://github.com/vikaskyadav/awesome-bash-alias)
 - [The Ultimate .bashrc File](https://gist.github.com/zachbrowne/8bc414c9f30192067831fafebd1425)
+- [AWS CLI Install](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html)
+- [i3 Customization Guide](https://itsfoss.com/i3-customization/)
+- [Rofi Sound Switcher](https://github.com/joshpetit/rofi-mixer?tab=readme-ov-file)

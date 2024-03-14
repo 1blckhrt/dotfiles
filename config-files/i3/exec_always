@@ -1,0 +1,16 @@
+# Display wallpaper
+exec_always feh --bg-fill /home/$USER/Pictures/Wallpapers/wallpaper.png
+
+# Transparency with picom compositor
+exec_always --no-startup-id killall picom
+exec_always --no-startup-id sleep 3
+exec_always --no-startup-id picom -f
+
+# dunst (notifications)
+exec_always --no-startup-id dunst [--config /home/$USER/.config/dunst/dunstrc]
+
+# monitor script
+exec_always --no-startup-id ~/Documents/Scripts/monitors
+
+# polybar launch script
+exec_always --no-startup-id /home/$USER/.config/polybar/launch

@@ -1,0 +1,14 @@
+# Set colors
+
+set $purple #8A2BE2
+set $black #000000
+set $transparent_black #00000000
+set $transparent_purple #8A2BE280
+
+# Set colors for border, background, text, and indicator
+
+client.focused $purple $purple $black $purple
+client.unfocused $transparent_black $transparent_black $purple $transparent_black
+client.focused_inactive $transparent_black $transparent_black $transparent_black $transparent_black
+client.urgent $purple $purple $black $purple
+client.placeholder $purple $purple $black $purple

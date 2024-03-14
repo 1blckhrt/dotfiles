@@ -1,14 +1,13 @@
 #!/bin/bash
 
 if [ ! -d "/home/blckhrt" ]; then
-    read -p "Home directory for user blckhrt not found, enter username: " WHOAMI
+	read -p "Home directory for user blckhrt not found, enter username: " WHOAMI
 else
-    WHOAMI="blckhrt"
+	WHOAMI="blckhrt"
 fi
 
 USERDIR=/home/$WHOAMI
 
-# System checks
 check_system() {
 	# Check if the script has been run as root
 	if [ "$(id -u)" -eq 0 ]; then
@@ -41,7 +40,7 @@ export -f check_system
 
 install_main_packages() {
 	echo -e '[INFO] Updating and upgrading system...'
-	apt update && apt upgrade -y 
+	apt update && apt upgrade -y
 	echo -e '[INFO] Installing packages...'
 	apt install -y \
 		nano \
@@ -65,12 +64,12 @@ sudo() {
 
 non_sudo() {
 	chmod -R +x ~/dotfiles/sub-install-scripts/
-	# bash ~/dotfiles/sub-install-scripts/aws.sh
 	bash ~/dotfiles/sub-install-scripts/git.sh
 	bash ~/dotfiles/sub-install-scripts/ssh.sh
-	bash ~/dotfiles/sub-install-scripts/miniconda.sh
 	bash ~/dotfiles/sub-install-scripts/vim.sh
 	bash ~/dotfiles/sub-install-scripts/home.sh
+	bash ~/dotfiles/sub-install-scripts/miniconda.sh
+	bash ~/dotfiles/sub-install-scripts/aws.sh
 }
 export -f non_sudo
 

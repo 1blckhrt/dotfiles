@@ -1,0 +1,9 @@
+#!/bin/bash
+echo -e "Logout\nReboot\nShutdown\nLock" | rofi -dmenu -i -p "Powermenu" -lines 3 | while read choice; do
+    case $choice in
+        Logout) ~/Documents/Scripts/logout;;
+        Reboot) ~/Documents/Scripts/reboot;;
+        Shutdown) ~/Documents/Scripts/shutdown;;
+    	Lock) ~/Documents/Scripts/lock;;
+    esac
+done
