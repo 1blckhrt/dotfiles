@@ -83,6 +83,7 @@ install_pkg() {
         flameshot \
         python3 \
         xrandr \
+        light \
         materia-gtk-theme \
         papirus-icon-theme \
         lxappearance \
@@ -99,11 +100,11 @@ sudo() {
 	check_system
 	install_pkg
     install_i3
-    setup_light
 }
 
 non_sudo() {
     chmod -R +x ~/dotfiles/sub-i3-install-scripts/
+    bash ~/dotfiles/sub-i3-install-scripts/setup_light.sh
     bash ~/dotfiles/sub-i3-install-scripts/move_i3_files.sh
     bash ~/dotfiles/sub-i3-install-scripts/move_i3_scripts.sh
     bash ~/dotfiles/sub-i3-install-scripts/move_i3blocks.sh
