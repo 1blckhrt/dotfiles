@@ -4,8 +4,6 @@ wget_discord() {
     if command -v discord &> /dev/null; then
         echo "[INFO] Discord is already installed."
         return
-    fi
-
     else 
         echo '[INFO] Installing Discord...'
         wget -O ~/Downloads/discord.deb "https://discord.com/api/download?platform=linux&format=deb"
@@ -16,3 +14,4 @@ wget_discord() {
 }
 
 wget_discord
+
