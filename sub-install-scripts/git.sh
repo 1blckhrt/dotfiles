@@ -21,6 +21,9 @@ git_setup() {
 		echo -e "[ERROR] Invalid choice. Please enter 'v' for Vim or 'n' for Nano."
 		exit 1
 	fi
+
+	git config --global core.excludesfile ~/.gitignore_global
+	git config --global help.autocorrect 5
 }
 
 git_setup
