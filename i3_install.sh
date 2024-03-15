@@ -99,6 +99,7 @@ sudo() {
 	check_system
 	install_pkg
     install_i3
+    setup_light
 }
 
 non_sudo() {
