@@ -35,6 +35,8 @@ install_pkg() {
         flameshot \
         python3 \
         xrandr \
+        chromium \
+        light \
         materia-gtk-theme \
         papirus-icon-theme \
         lxappearance \
