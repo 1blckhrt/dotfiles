@@ -23,7 +23,7 @@ git_setup() {
 	fi
 
 	git config --global core.excludesfile ~/.gitignore_global
-	git config --global help.autocorrect 5
+	git config --global help.autocorrect 50
 }
 
 git_setup
