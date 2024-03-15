@@ -98,11 +98,12 @@ export -f install_pkg
 
 sudo() {
 	check_system
-	install_pkg
     install_i3
+	install_pkg
 }
 
 non_sudo() {
+
     chmod -R +x ~/dotfiles/sub-i3-install-scripts/
     bash ~/dotfiles/sub-i3-install-scripts/setup_light.sh
     bash ~/dotfiles/sub-i3-install-scripts/move_i3_files.sh
@@ -114,6 +115,9 @@ non_sudo() {
     bash ~/dotfiles/sub-i3-install-scripts/move_polybar.sh
     bash ~/dotfiles/sub-i3-install-scripts/move_rofi.sh
     bash ~/dotfiles/sub-i3-install-scripts/move_wallpaper.sh
+    bash ~/dotfiles/sub-i3-install-scripts/install_pip_modules.sh
+    bash ~/dotfiles/sub-i3-install-scripts/move_kitty.sh
+    bash ~/dotfiles/sub-i3-install-scripts/move_autotile.sh
 }
 export -f non_sudo
 

@@ -13,3 +13,5 @@ floating_modifier $mod
 
 # Disable title bars for normal windows
 for_window [class="^.*"] border pixel 1
+
+exec_always --no-startup-id ./home/$USER/.config/i3/autotile

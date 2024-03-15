@@ -23,3 +23,4 @@ sudo apt install git
 - [AWS CLI Install](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html)
 - [i3 Customization Guide](https://itsfoss.com/i3-customization/)
 - [Rofi Sound Switcher](https://github.com/joshpetit/rofi-mixer?tab=readme-ov-file)
+- [i3 Autotiling Script](https://github.com/nwg-piotr/autotiling/blob/master/autotiling/main.py)
