@@ -12,7 +12,7 @@ sudo apt install git
 
 - `./install.sh` installs all requirements for the CEG 2410 dotfiles assignment, must run as sudo. All subscripts are in "/sub-install-scripts"
 
-- `./i3_install.sh` installs the i3 window manager, various packages, and sets up a fully customized environment to work in.Must run as sudo. All subscripts are in `/sub-i3-install-scripts`
+- `./i3_install.sh` installs the i3 window manager, various packages, and sets up a fully customized environment to work in. Must run as sudo. All subscripts are in `/sub-i3-install-scripts`
 
 ## **Notice**
 
