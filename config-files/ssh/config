@@ -1,9 +1,13 @@
+# externally connecting to fry.cs.wright.edu
 Host fry
 	HostName fry.cs.wright.edu
-
+	User w059pxw
+	Port 22
+	IdentityFile /home/blckhrt/.ssh/id_ed25519
+	
 # externally connecting to pop os computer
 Host hosting-laptop
 	HostName 100.71.208.109
 	User blckhrt
 	Port 22
-	IdentityFile ~/.ssh/id_ed25519
+	IdentityFile /home/blckhrt/.ssh/id_ed25519
