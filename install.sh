@@ -49,6 +49,7 @@ install_main_packages() {
 		python3-pip \
 		nmap \
 		sl \
+		vim \
 		wget || {
 		echo -e "[ERROR] Failed to install packages. Exiting..."
 		exit 1
