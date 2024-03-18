@@ -15,4 +15,4 @@ floating_modifier $mod
 for_window [class="^.*"] border pixel 1
 
 # autotiling
-exec_always --no-startup-id ~/.config/i3/autotiling
+exec_always --no-startup-id ~/.config/i3/autotile
