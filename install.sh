@@ -59,10 +59,9 @@ install_main_packages() {
 }
 export -f install_main_packages
 
-sudo() {
+sudo_functions() {
 	check_system
 	install_main_packages
- 	sudo bash ~/dotfiles/sub-install-scripts/aws.sh
 }
 
 non_sudo() {
@@ -75,5 +74,6 @@ non_sudo() {
 }
 export -f non_sudo
 
-sudo
+sudo_functions
+sudo bash ~/dotfiles/sub-install-scripts/aws.sh
 su "$SUDO_USER" -c "non_sudo"
