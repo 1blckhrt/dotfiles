@@ -62,6 +62,7 @@ export -f install_main_packages
 sudo() {
 	check_system
 	install_main_packages
+ 	sudo bash ~/dotfiles/sub-install-scripts/aws.sh
 }
 
 non_sudo() {
@@ -71,7 +72,6 @@ non_sudo() {
 	bash ~/dotfiles/sub-install-scripts/vim.sh
 	bash ~/dotfiles/sub-install-scripts/home.sh
 	bash ~/dotfiles/sub-install-scripts/miniconda.sh
-	bash ~/dotfiles/sub-install-scripts/aws.sh
 }
 export -f non_sudo
 
