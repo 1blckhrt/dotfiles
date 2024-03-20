@@ -50,6 +50,7 @@ install_main_packages() {
 		nmap \
 		sl \
 		vim \
+  		unzip \
 		wget || {
 		echo -e "[ERROR] Failed to install packages. Exiting..."
 		exit 1
