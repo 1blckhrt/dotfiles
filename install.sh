@@ -77,3 +77,4 @@ export -f non_sudo
 sudo_functions
 sudo bash ~/dotfiles/sub-install-scripts/aws.sh
 su "$SUDO_USER" -c "non_sudo"
+echo -e "[SUCCESS] Your system is now setup!"
