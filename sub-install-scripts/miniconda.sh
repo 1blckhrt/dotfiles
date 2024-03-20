@@ -17,7 +17,7 @@ install_miniconda() {
         echo '[INFO] Installing Miniconda...'
         mkdir -p ~/miniconda3
         wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O ~/miniconda3/miniconda.sh
-        bash ~/miniconda3/miniconda.sh -b -u -p --no-modify ~/miniconda3
+        bash ~/miniconda3/miniconda.sh -b -u -p ~/miniconda3
         rm -rf ~/miniconda3/miniconda.sh
         echo "[INFO] Miniconda has been installed. Continuing..."
     elif [[ "$choice" == "n" || "$choice" == "no" ]]; then
