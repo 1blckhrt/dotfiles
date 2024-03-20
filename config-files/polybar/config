@@ -108,9 +108,9 @@ font-5 = "JetBrains Mono Nerd Font:size=10;1"
 ;   modules-left = cpu ram
 ;   modules-center = xwindow xbacklight
 ;   modules-right = ipc clock
-modules-left = i3 previous playpause next spotify
+modules-left = i3 previous playpause next spotify sep title
 modules-center = date weather
-modules-right = sep title sep volume brightness battery tray
+modules-right = sep volume brightness battery system-tray
 
 ; The separator will be inserted between the output of each module
 separator = |
@@ -138,7 +138,7 @@ wm-name = i3
 ;   center
 ;   right
 ;   none
-tray-position = none
+tray-position = right
 
 ; If true, the bar will not shift its
 ; contents when the tray changes
@@ -157,7 +157,7 @@ tray-transparent = false
 ; ARGB color (e.g. #f00, #ff992a, #ddff1023)
 ; By default the tray container will use the bar
 ; background color.
-tray-background = #8A2BE200
+tray-background = #000000 
 
 ; Tray offset defined as pixel value (e.g. 35) or percentage (e.g. 50%)
 tray-offset-x = 0
