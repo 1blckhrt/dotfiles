@@ -1,6 +1,7 @@
 # dotfiles
 
-Dotfiles for my Ubuntu 22.04 setup
+Dotfiles for my Ubuntu 24.04 setup
+
 
 ## Install prerequisites
 
@@ -10,14 +11,11 @@ sudo apt install git
 
 ## Script options
 
-- `./install.sh` installs all requirements for the CEG 2410 dotfiles assignment, must run as sudo. All subscripts are in "/sub-install-scripts"
-
-- `./i3_install.sh` installs the i3 window manager, various packages, and sets up a fully customized environment to work in. Must run as sudo. All subscripts are in `/sub-i3-install-scripts`
+- `./install.sh` installs all packages and runs all subscripts. You **must** run as sudo otherwise the script will exit and/or fail.
 
 ## **Notice**
 
 - Look through each script to make sure that it will work on your system. I cannot guarantee this will work on every system.
-- `./i3_install.sh` is still a work in progress. Make sure you back up your existing config files before running it
 
 ## Sources/references
 
