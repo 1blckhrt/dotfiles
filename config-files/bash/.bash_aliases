@@ -14,5 +14,5 @@ alias ls="ls -lah"
 # cd home
 alias home='cd ~'
 
-# nano -> vim because I want to get used to vim
-alias nano='vim'
+# nano -> nvim because I want to get used to vim
+alias nano='nvim'

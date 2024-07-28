@@ -44,12 +44,6 @@ install_main_packages() {
 	echo -e '[INFO] Installing packages...'
 	apt install -y \
 		nano \
-		dnsutils \
-		python3 \
-		python3-pip \
-		nmap \
-		sl \
-		vim \
   		unzip \
 		wget || {
 		echo -e "[ERROR] Failed to install packages. Exiting..."
@@ -67,10 +61,8 @@ sudo_functions() {
 non_sudo() {
 	chmod -R +x ~/dotfiles/sub-install-scripts/
 	bash ~/dotfiles/sub-install-scripts/git.sh
-	bash ~/dotfiles/sub-install-scripts/ssh.sh
-	bash ~/dotfiles/sub-install-scripts/vim.sh
 	bash ~/dotfiles/sub-install-scripts/home.sh
-	bash ~/dotfiles/sub-install-scripts/miniconda.sh
+	bash ~/dotfiles/sub-install-scripts/nvim.sh
 }
 export -f non_sudo
 
