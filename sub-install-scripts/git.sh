@@ -5,25 +5,26 @@ git_setup() {
 	git config --global user.name 1blckhrt
 	git config --global user.email williams.1691@wright.edu
 
-	read -rp "[PROMPT] Which core editor do you prefer, Vim or Nano? (v/n): " editor
+	read -rp "[PROMPT] Which core editor do you prefer, Vim, Neovim, or Nano (vim/neovim/nano): " editor
 
 	# Convert input to lowercase for case-insensitive comparison
 	editor=$(echo -e "$editor" | tr '[:upper:]' '[:lower:]')
 
 	# Check the user's choice and set the core editor accordingly
-	if [[ "$editor" == "v" || "$editor" == "vim" ]]; then
+	if [[ "$editor" == "vim" ]]; then
 		git config --global core.editor "vim"
 		echo -e '[INFO] Finished setting git configurations. Continuing...'
-	elif [[ "$editor" == "n" || "$editor" == "nano" ]]; then
+  elif [[ "$editor" == "neovim" ]]; then
+    git config --global core.editor "nvim"
+    echo -e '[INFO] Finished setting git configurations. Continuing...'
+	elif [[ "$editor" == "nano" ]]; then
 		git config --global core.editor "nano"
 		echo -e '[INFO] Finished setting git configurations. Continuing...'
-	else
-		echo -e "[ERROR] Invalid choice. Please enter 'v' for Vim or 'n' for Nano."
+  else
+		echo -e "[ERROR] Invalid choice. Please enter 'vim', 'neovim', or 'nano'."
 		exit 1
 	fi
-
-	git config --global core.excludesfile ~/.gitignore_global
-	git config --global help.autocorrect 50
 }
+
 
 git_setup
