@@ -1,0 +1,13 @@
+hyprland
+kitty
+neovim
+hyprpaper
+waybar
+ttf-font-awesome
+atuin
+github-cli
+gvfs-smb
+wl-clipboard
+wlr-randr
+wofi
+thunar
