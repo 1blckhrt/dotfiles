@@ -1,0 +1,18 @@
+set $mod Mod4
+
+include /home/$USER/.config/i3/fonts
+include /home/$USER/.config/i3/startup
+include /home/$USER/.config/i3/keybinds
+include /home/$USER/.config/i3/exec_always
+include /home/$USER/.config/i3/workspaces
+include /home/$USER/.config/i3/bar
+include /home/$USER/.config/i3/colors
+include /home/$USER/.config/i3/gaps
+
+floating_modifier $mod
+
+# Disable title bars for normal windows
+for_window [class="^.*"] border pixel 1
+
+# autotiling
+exec_always --no-startup-id ~/.config/i3/autotile

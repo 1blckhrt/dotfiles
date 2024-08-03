@@ -1,0 +1,93 @@
+#!/bin/bash
+
+# Function to set default source
+set_default_source() {
+    local source_description="$1"
+    local source_name="${sources[$source_description]}"
+    if [ -n "$source_name" ]; then
+        pactl set-default-source "$source_name" && \
+            notify-send --icon=notification-audio-volume-high "Default Audio Source" "$source_description" || \
+            notify-send --icon=dialog-error "Couldn't set default audio source!"
+    else
+        echo "Error: Invalid source description."
+    fi
+}
+
+# Function to set default sink
+set_default_sink() {
+    local sink_description="$1"
+    local sink_name="${sinks[$sink_description]}"
+    if [ -n "$sink_name" ]; then
+        pactl set-default-sink "$sink_name" && \
+            notify-send --icon=notification-audio-volume-high "Default Audio Sink" "$sink_description" || \
+            notify-send --icon=dialog-error "Couldn't set default audio sink!"
+    else
+        echo "Error: Invalid sink description."
+    fi
+}
+
+# Create an associative array for sources
+declare -A sources
+
+# Get the list of sources and their descriptions
+source_info=$(pactl list sources)
+names=$(echo "$source_info" | sed -n 's/.*Name: \(.*\)/\1/p')
+descriptions=$(echo "$source_info" | sed -n 's/.*Description: \(.*\)/\1/p')
+
+# Populate the associative array for sources
+IFS=$'\n' read -r -d '' -a names_arr <<<"$names"
+IFS=$'\n' read -r -d '' -a descriptions_arr <<<"$descriptions"
+for ((i = 0; i < ${#descriptions_arr[@]}; i++)); do
+    sources["${descriptions_arr[$i]}"]="${names_arr[$i]}"
+done
+
+# Create an associative array for sinks
+declare -A sinks
+
+# Get the list of sinks and their descriptions
+sink_info=$(pactl list sinks)
+names=$(echo "$sink_info" | sed -n 's/.*Name: \(.*\)/\1/p')
+descriptions=$(echo "$sink_info" | sed -n 's/.*Description: \(.*\)/\1/p')
+
+# Populate the associative array for sinks
+IFS=$'\n' read -r -d '' -a names_arr <<<"$names"
+IFS=$'\n' read -r -d '' -a descriptions_arr <<<"$descriptions"
+for ((i = 0; i < ${#descriptions_arr[@]}; i++)); do
+    sinks["${descriptions_arr[$i]}"]="${names_arr[$i]}"
+done
+
+# Combine descriptions for rofi menu
+input_devices=$(printf "%s\n" "${!sources[@]}")
+output_devices=$(printf "%s\n" "${!sinks[@]}")
+
+menu_items=$(echo -e "Input Devices\n$input_devices\n\nOutput Devices\n$output_devices")
+
+# Display rofi menu
+selected=$(echo "$menu_items" | rofi -dmenu -p "Toggle Default Audio Source/Sink")
+
+# Check if a selection was made
+if [ -n "$selected" ]; then
+    if [[ "$selected" == "Input Devices" ]]; then
+        selected=$(echo "$input_devices" | rofi -dmenu -p "Select Default Audio Source")
+        if [ -n "$selected" ]; then
+            set_default_source "$selected"
+        else
+            echo "No source selected. Default audio source unchanged."
+        fi
+    elif [[ "$selected" == "Output Devices" ]]; then
+        selected=$(echo "$output_devices" | rofi -dmenu -p "Select Default Audio Sink")
+        if [ -n "$selected" ]; then
+            set_default_sink "$selected"
+        else
+            echo "No sink selected. Default audio sink unchanged."
+        fi
+    elif [[ "${sources[$selected]}" ]]; then
+        set_default_source "$selected"
+    elif [[ "${sinks[$selected]}" ]]; then
+        set_default_sink "$selected"
+    else
+        echo "Error: Invalid selection."
+    fi
+else
+    echo "No selection made."
+fi
