@@ -12,3 +12,4 @@ install_zsh() {
 
     echo -e "\n[SUCCESS] Zsh has been installed successfully.\n"
 }
+install_zsh

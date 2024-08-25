@@ -9,14 +9,6 @@ fi
 USERDIR=/home/$WHOAMI
 
 check_system() {
-	# Check if the script has been run as root
-	if [ "$(id -u)" -eq 0 ]; then
-		echo -e "\n[INFO] Script has been run as root. Continuing..."\n
-	else
-		echo -e "\n[ERROR] Script has not been run as root. Please relaunch using sudo.\n"
-		exit 1
-	fi
-
 	# Check if the package manager is apt
 	if [ -x /usr/bin/apt ]; then
 		echo -e "\n[INFO] Apt package manager is installed. Continuing...\n"
