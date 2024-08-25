@@ -37,3 +37,5 @@ check_system() {
 	fi
 }
 export -f check_system
+
+echo -e "\n[SUCCESS] Your system is ready. It is HIGHLY recommended to reboot before proceeding.\n"
