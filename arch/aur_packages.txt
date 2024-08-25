@@ -1,4 +1,0 @@
-kew
-ttf-jetbrains-mono-nerd
-vesktop
-visual-studio-code-bin
