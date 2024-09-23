@@ -9,5 +9,6 @@ hyprland_install() {
   sudo nala install ./libssl1.1_1.1.1f-1ubuntu2.23_amd64.deb
   sudo nala install ./libzip5_1.5.1-0ubuntu1_amd64.deb
   sudo nala install libtomlplusplus-dev
+  sudo pacstall -I hyprland-bin
 }
 hyprland_install
