@@ -74,15 +74,15 @@ install_packages() {
 	wget -O ~/Downloads/deb_pkg/vesktop.deb https://vencord.dev/download/vesktop/arm64/deb
 
 	printf "[INFO] Installing .deb packages..."
-    cd ~/Downloads/deb_pkg
-    sudo nala install ./*.deb -y
-    cd ~
+    	cd ~/Downloads/deb_pkg
+    	sudo nala install ./*.deb -y
+    	cd ~
 
-    printf "[INFO] Installing VS Code..."
-    echo "code code/add-microsoft-repo boolean true" | sudo debconf-set-selections
-    sudo nala install apt-transport-https -y
-    sudo nala update
-    sudo nala install code -y
+    	printf "[INFO] Installing VS Code..."
+   	echo "code code/add-microsoft-repo boolean true" | sudo debconf-set-selections
+   	sudo nala install apt-transport-https -y
+	sudo nala update
+   	sudo nala install code -y
 }
 export -f install_packages
 
