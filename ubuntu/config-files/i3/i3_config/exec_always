@@ -7,7 +7,7 @@ exec_always --no-startup-id sleep 3
 exec_always --no-startup-id picom -f
 
 # dunst (notifications)
-exec_always --no-startup-id dunst [--config /home/$USER/.config/dunst/dunstrc]
+exec_always --no-startup-id dunst --config /home/$USER/.config/dunst/dunstrc
 
 # monitor script
 exec_always --no-startup-id ~/Documents/Scripts/monitors
