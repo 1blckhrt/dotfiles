@@ -21,9 +21,10 @@
     pkgs.atuin
     pkgs.zoxide
     pkgs.btop
-    pkgs.nvim
+    pkgs.neovim
     pkgs.git
     pkgs.gh
+    pkgs.nixfmt
   ];
 
   home.sessionVariables = {

@@ -14,17 +14,17 @@ else
 	exit 1
 fi
 
-echo -e "[INFO] Installing Nix package manager..."
-sh <(curl -L https://nixos.org/nix/install) --daemon
+# echo -e "[INFO] Installing Nix package manager..."
+# sh <(curl -L https://nixos.org/nix/install) --daemon
 
-echo -e "[INFO] Reloading shell..."
-"$SHELL" -l
+# echo -e "[INFO] Reloading shell..."
+# "$SHELL" -l
 
-echo -e "[INFO] Testing Nix installation..."
-if ! nix run nixpkgs#hello; then
-    echo -e "[ERROR] Nix installation failed. Please ensure that your internet connection is working and try again."
-    exit 1
-fi
+# echo -e "[INFO] Testing Nix installation..."
+# if ! nix run nixpkgs#hello; then
+#     echo -e "[ERROR] Nix installation failed. Please ensure that your internet connection is working and try again."
+#     exit 1
+# fi
 
 echo -e "[INFO] Enabling flakes in Nix..."
 mkdir -p ~/.config/nix
@@ -35,9 +35,6 @@ echo -e "[INFO] Installing Home Manager..."
 nix-channel --add https://github.com/nix-community/home-manager/archive/master.tar.gz home-manager
 nix-channel --update
 nix-shell '<home-manager>' -A install
-
-echo -e "[INFO] Reloading shell..."
-"$SHELL" -l
 
 echo -e "[INFO] Testing Home Manager installation..."
 if ! home-manager --version; then
@@ -55,3 +52,15 @@ else
     }
 fi
 
+cd ~/dotfiles/terminal || {
+    echo -e "[ERROR] Failed to change directory to ~/dotfiles/terminal. Exiting..."
+    exit 1
+}
+
+echo -e "[INFO] Installing Home Manager configuration..."
+home-manager switch --flake .#blckhrt -b backup || {
+    echo -e "[ERROR] Failed to install Home Manager configuration. Exiting..."
+    exit 1
+}
+
+echo -e "[SUCCESS] Your terminal setup is complete. Enjoy your new shell!"
