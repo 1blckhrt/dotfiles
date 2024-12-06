@@ -2,6 +2,18 @@
 
 clear
 
+if [ -x /usr/bin/apt ]; then
+	echo -e "[INFO] Apt package manager is installed. Updating and upgrading system..."
+    sudo apt update && sudo apt upgrade -y
+    sudo apt install nala || {
+        echo -e "[ERROR] Failed to install Nala. Please ensure that your internet connection is working and try again."
+        exit 1
+    }
+else
+	echo -e "[ERROR] Apt package manager is NOT installed. Skipping update and upgrade with Nala..."
+	exit 1
+fi
+
 echo -e "[INFO] Installing Nix package manager..."
 sh <(curl -L https://nixos.org/nix/install) --daemon
 
