@@ -23,6 +23,8 @@ PACKAGES=(
 	"neovim"
 	"unzip"
 	"thunar"
+	"nodejs"
+	'npm'
 	)
 
 AUR_PACKAGES=(
@@ -44,6 +46,8 @@ else
     echo -n "[WARN] No AUR helper found. Skipping AUR package installation."
 fi
 
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash
+
 echo -n "[SUCCESS] Package install has completed successfully!"
 
 echo -n "[INFO] Starting shell configuration"
@@ -52,9 +56,11 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/too
 
 curl --proto '=https' --tlsv1.2 -LsSf https://setup.atuin.sh | sh
 
-chsh -s $(which zsh)
+npm install -g pnpm
 
 # do stow stuff here
 
 stow nvim
 stow .
+
+echo -n "[SUCCESS] System configured. Please reboot!"
