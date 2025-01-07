@@ -1,0 +1,5 @@
+vim.opt.swapfile = false
+vim.g.mapleader = " "
+vim.opt.number = true
+
+
