@@ -1,0 +1,8 @@
+[user]
+	email = williams.1691@wright.edu
+	name = 1blckhrt
+[help]
+	autocorrect = 50
+[core]
+	editor = vim
+	excludesfile = /home/blckhrt/.gitignore_global

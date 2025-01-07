@@ -1,0 +1,16 @@
+# Folders
+__pycache__/
+node_modules/
+build/
+dist/
+output/
+
+# OS generated files
+.DS_Store
+.DS_Store?
+
+# Secrets/sensitive files
+*.env
+*config.json
+*env.json
+*db.json
