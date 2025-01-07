@@ -1,7 +1,6 @@
 # dotfiles
 
-Dotfiles for my Ubuntu 24.04 setup
-
+Dotfiles for my Linux setup
 
 ## Install prerequisites
 
