@@ -17,7 +17,6 @@
     pkgs.fastfetch
     pkgs.zsh
     pkgs.bat
-    pkgs.starship
     pkgs.atuin
     pkgs.zoxide
     pkgs.btop
