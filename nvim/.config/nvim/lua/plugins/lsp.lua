@@ -38,17 +38,29 @@ return {
 		},
 	},
 	{
+		"hrsh7th/cmp-path",
+		dependencies = { "nvim-cmp" },
+	},
+
+	{
 		"hrsh7th/nvim-cmp",
 		event = "InsertEnter",
 		dependencies = {
-			 "hrsh7th/cmp-buffer", -- source for text in buffer
-    			"hrsh7th/cmp-path", -- source for file system paths
+			"hrsh7th/cmp-buffer", -- source for text in buffer
+			"hrsh7th/cmp-path", -- source for file system paths
 		},
 		config = function()
 			local cmp = require("cmp")
 			require("luasnip.loaders.from_vscode").lazy_load()
 
 			cmp.setup({
+				sources = cmp.config.sources({
+					{ name = "nvim_lsp" },
+					{ name = "luasnip" }, -- For luasnip users.
+					{ name = "buffer" },
+					{ name = "path" },
+					{ name = "copilot" },
+				}),
 				snippet = {
 					expand = function(args)
 						require("luasnip").lsp_expand(args.body)
@@ -62,12 +74,6 @@ return {
 					["<CR>"] = cmp.mapping.confirm({ select = true }),
 					["<Tab>"] = cmp.mapping.select_next_item(),
 					["<S-Tab>"] = cmp.mapping.select_prev_item(),
-				}),
-				sources = cmp.config.sources({
-					{ name = "nvim_lsp" },
-					{ name = "luasnip" }, -- For luasnip users.
-					{ name = "buffer" },
-					{ name = "path" },
 				}),
 			})
 		end,
@@ -112,12 +118,25 @@ return {
 		indent = { enable = true },
 	},
 	{
-		"zbirenbaum/copilot.lua",
-		cmd = "Copilot",
+		"zbirenbaum/copilot-cmp",
 		event = "InsertEnter",
-		opts = {
-			suggestion = { enabled = false },
-			panel = { enabled = false },
+		config = function()
+			require("copilot_cmp").setup()
+		end,
+		dependencies = {
+			"zbirenbaum/copilot.lua",
+			cmd = "Copilot",
+			config = function()
+				require("copilot").setup({
+					suggestion = { enabled = false },
+					panel = { enabled = false },
+					filetypes = {
+						rust = false,
+						["*"] = true,
+					},
+					copilot_node_command = vim.fn.expand("$HOME") .. "/.nvm/versions/node/v23.6.1/bin/node",
+				})
+			end,
 		},
 	},
 }
