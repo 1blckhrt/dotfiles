@@ -1,5 +1,5 @@
-# If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH
+# If you come from bash you might have to change your $PAH
+export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH
 
 # Path to your Oh My Zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
@@ -117,3 +117,9 @@ export NVM_DIR="$HOME/.nvm"
 eval "$(zoxide init zsh)"
 
 export PATH="$HOME/.cargo/bin:$PATH"
+
+# Start SSH agent if it's not already running
+if ! pgrep -u $USER ssh-agent > /dev/null; then
+    eval "$(ssh-agent -s)"
+fi
+
