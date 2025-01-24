@@ -39,6 +39,11 @@ return {
 	},
 	{
 		"hrsh7th/nvim-cmp",
+		event = "InsertEnter",
+		dependencies = {
+			 "hrsh7th/cmp-buffer", -- source for text in buffer
+    			"hrsh7th/cmp-path", -- source for file system paths
+		},
 		config = function()
 			local cmp = require("cmp")
 			require("luasnip.loaders.from_vscode").lazy_load()
@@ -59,12 +64,10 @@ return {
 					["<S-Tab>"] = cmp.mapping.select_prev_item(),
 				}),
 				sources = cmp.config.sources({
-					{ name = "copilot", group_index = 2 },
-					{ name = "path", group_index = 2 },
 					{ name = "nvim_lsp" },
 					{ name = "luasnip" }, -- For luasnip users.
-				}, {
 					{ name = "buffer" },
+					{ name = "path" },
 				}),
 			})
 		end,
