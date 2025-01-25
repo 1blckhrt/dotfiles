@@ -1,6 +1,7 @@
 format = """
+$hostname
 [░▒▓](#808080)\
-[  ](bg:#808080 fg:#d3d3d3)\
+[](bg:#808080 fg:#d3d3d3)\
 [](bg:#a9a9a9 fg:#808080)\
 $directory\
 [](fg:#a9a9a9 bg:#404040)\
@@ -15,6 +16,10 @@ $php\
 $time\
 [ ](fg:#1a1a1a)\
 \n$character"""
+
+[hostname]
+ssh_only = false
+format = '[$ssh_symbol](bold blue) on [$hostname](bold white) '
 
 [directory]
 style = "fg:#d3d3d3 bg:#a9a9a9"
