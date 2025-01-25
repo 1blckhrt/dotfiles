@@ -110,6 +110,8 @@ return {
 				"html",
 				"css",
 				"typescript",
+				"python",
+				"rust",
 			},
 		},
 
@@ -137,6 +139,23 @@ return {
 					copilot_node_command = vim.fn.expand("$HOME") .. "/.nvm/versions/node/v23.6.1/bin/node",
 				})
 			end,
+		},
+	},
+	{
+		"WhoIsSethDaniel/mason-tool-installer.nvim",
+		opts = {
+			ensure_installed = {
+				"stylua",
+				"prettier",
+				"eslint_d",
+				"typescript-language-server",
+				"tailwindcss",
+				"html",
+				"cssls",
+				"rust-analyzer",
+				"rustfmt",
+				"codelldb",
+			},
 		},
 	},
 }
