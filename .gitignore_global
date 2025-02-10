@@ -10,7 +10,8 @@ output/
 .DS_Store?
 
 # Secrets/sensitive files
-*.env
-*config.json
-*env.json
-*db.json
+.env
+config.json
+env.json
+db.json
+*.db
