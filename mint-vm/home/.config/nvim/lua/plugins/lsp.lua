@@ -22,7 +22,12 @@ return {
 			lspconfig.lua_ls.setup({
 				capabilities = capabilities,
 			})
+			
 			lspconfig.tailwindcss.setup({
+				capabilities = capabilities,
+			})
+
+			lspconfig.pyright.setup({
 				capabilities = capabilities,
 			})
 		end,
@@ -90,6 +95,7 @@ return {
 				"tailwindcss",
 				"html",
 				"cssls",
+				"pyright",
 			},
 		},
 	},
@@ -155,6 +161,9 @@ return {
 				"rust-analyzer",
 				"rustfmt",
 				"codelldb",
+				"black",
+				"ruff",
+				"mypy",
 			},
 		},
 	},
