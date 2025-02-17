@@ -1,7 +1,14 @@
 return {
 	"nvim-lualine/lualine.nvim",
-	dependencies = { "nvim-tree/nvim-web-devicons" },
-	opts = {
-		theme = "lackluster"
-	}
+	dependencies = { "echasnovski/mini.icons" },
+	config = function()
+		require("lualine").setup({
+			options = {
+				icons_enabled = false,
+				theme = "auto",
+				component_separators = "",
+				section_separators = "",
+			},
+		})
+	end,
 }
