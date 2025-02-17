@@ -22,7 +22,7 @@ return {
 			lspconfig.lua_ls.setup({
 				capabilities = capabilities,
 			})
-			
+
 			lspconfig.tailwindcss.setup({
 				capabilities = capabilities,
 			})
@@ -142,7 +142,7 @@ return {
 						rust = false,
 						["*"] = true,
 					},
-					copilot_node_command = vim.fn.expand("$HOME") .. "/.nvm/versions/node/v23.6.1/bin/node",
+					copilot_node_command = vim.fn.expand("$HOME") .. "/.nvm/versions/node/v23.8.0/bin/node",
 				})
 			end,
 		},
