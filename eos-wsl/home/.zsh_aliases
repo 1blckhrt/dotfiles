@@ -11,4 +11,4 @@ alias tree="lsd --tree"
 alias nano="nvim"
 alias vim="nvim"
 alias mkdir="mkdir -p"
-alias obsidian="cd /mnt/c/Users/blckh/OneDrive/Documents/\!Notes"
+alias obs='cd "/mnt/c/Users/blckh/iCloudDrive/iCloud~md~obsidian/Parker'\''s Vault/"'
