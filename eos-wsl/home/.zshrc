@@ -1,4 +1,5 @@
 ### exporting to path ###
+export PATH=$PATH:/snap/bin
 export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH # standard path
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
