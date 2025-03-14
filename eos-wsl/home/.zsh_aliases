@@ -1,5 +1,5 @@
-alias install="sudo pacman -S"
-alias upgrade="sudo pacman -Syu"
+alias install="sudo nala install"
+alias upgrade="sudo nala update && sudo nala upgrade"
 alias h="history"
 alias reload="source ~/.zshrc"
 alias ff="fastfetch"

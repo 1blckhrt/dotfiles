@@ -19,7 +19,6 @@ CASE_SENSITIVE="true"
 HYPHEN_INSENSITIVE="true"
 HIST_STAMPS="mm/dd/yyyy"
 plugins=(git)
-source $ZSH/oh-my-zsh.sh
 source "$HOME/.zsh_aliases"
 
 ### sourcing dotfiles ###
