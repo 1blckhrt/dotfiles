@@ -14,6 +14,5 @@ return {
 			end,
 			desc = "Buffer Local Keymaps (which-key)",
 		},
-		{ "n", "<leader>e", ":CHADopen<CR>", { noremap = true, silent = true } },
 	},
 }
