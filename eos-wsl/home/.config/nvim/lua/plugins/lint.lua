@@ -9,7 +9,7 @@ return {
 		lint.linters_by_ft = {
 			javascript = { "eslint" },
 			typescript = { "eslint" },
-			python = { "pylint " },
+			python = { "pylint" },
 		}
 
 		local lint_augroup = vim.api.nvim_create_augroup("lint", { clear = true })

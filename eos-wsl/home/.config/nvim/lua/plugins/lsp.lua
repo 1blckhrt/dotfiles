@@ -142,7 +142,7 @@ return {
 						rust = false,
 						["*"] = true,
 					},
-					copilot_node_command = vim.fn.expand("$HOME") .. "/.nvm/versions/node/v23.10.0/bin/node",
+					copilot_node_command = vim.fn.expand("$HOME") .. "/.nvm/versions/node/v23.9.0/bin/node",
 				})
 			end,
 		},
