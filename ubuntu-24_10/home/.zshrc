@@ -27,3 +27,7 @@ eval "$(atuin init zsh)"
 eval "$(zoxide init zsh)"
 eval "$(starship init zsh)"
 
+### environment variables ###
+export EDITOR=nvim
+export VISUAL=$EDITOR
+
