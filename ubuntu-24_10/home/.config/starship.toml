@@ -1,24 +1,29 @@
 format = """
+[](#5e81ac)\
 $os\
-$username\
-$hostname\
+[ | ](fg:#2e3440 bg:#5e81ac)\
+$username[@](bg:#5e81ac fg:#2e3440)$hostname\
+[](bg:#81a1c1 fg:#5e81ac)\
 $directory\
-$git_branch\
-$git_state\
-$git_status\
-$character"""
-
-right_format = """
-$git_branch\
+[](bg:#d9dee9 fg:#8fbcbb)\
+$cmd_duration\
+[](fg:#d9dee9)\
+$line_break\
+$character
 """
 
+
 add_newline = false
-palette = "everforest"
+
+[hostname]
+ssh_only = false
+style = "fg:#2e3440 bg:#5e81ac"
+format = "[$ssh_symbol$hostname ]($style)"
+ssh_symbol = " "
 
 [os]
+style = "fg:#2e3440 bg:#5e81ac"
 disabled = false
-format = '[$symbol ]($style)'
-style = 'fg:grey2'
 
 [os.symbols]
 Windows = "󰍲"
@@ -43,58 +48,26 @@ RedHatEnterprise = "󱄛"
 
 [username]
 show_always = true
-style_root = 'fg:red'
-style_user = 'fg:blue'
 format = '[$user]($style)'
-
-[hostname]
-ssh_only = false
-style = 'fg:blue'
-format = '[@$hostname]($style) '
+style_user = "fg:#2e3440 bg:#5e81ac"
 
 [directory]
-style = "fg:orange"
-read_only_style = "fg:orange"
-truncation_length = 3
-truncation_symbol = "…/"
-format = "[ $path]($style)[$read_only]($read_only_style) "
+style = "fg:#2e3440 bg:#81a1c1"
+read_only = " "
+format = "[ 󰉋 $path ]($style)[$read_only]($read_only_style)"
+read_only_style = "fg:#2e3440 bold bg:#81a1c1"
 
-[git_branch]
-style = "fg:green"
-symbol = " "
-format = "[$symbol$branch(:$remote_branch)]($style) "
+[sudo]
+disabled = false
+symbol = " "
+style = "fg:#2e3440 bg:#d9dee9"
+format = "[ $symbol]($style)"
+
+[cmd_duration]
+format = "[ 󰔚 $duration ]($style)"
+style = "fg:#2e3440 bg:#d9dee9"
 
 [character]
-success_symbol = '[](bold green)'
-error_symbol = '[](bold red)'
-
-[palettes.everforest]
-bg_dim = "#232a2e"
-bg0 = "#2d353b"
-bg1 = "#343f44"
-bg2 = "#3d484d"
-bg3 = "#475258"
-bg4 = "#4f585e"
-bg5 = "#56635f"
-bg_visual = "#543a48"
-bg_red = "#514045"
-bg_green = "#425047"
-bg_blue = "#3a515d"
-bg_yellow = "#4d4c43"
-
-fg = "#d3c6aa"
-red = "#e67e80"
-
-orange = "#e69875"
-yellow = "#dbbc7f"
-green = "#a7c080"
-aqua = "#83c092"
-blue = "#7fbbb3"
-purple = "#d699b6"
-grey0 = "#7a8478"
-grey1 = "#859289"
-grey2 = "#9da9a0"
-statusline1 = "#a7c080"
-statusline2 = "#d3c6aa"
-statusline3 = "#e67e80"
-
+success_symbol = "[ 󱞩](bold green)"
+error_symbol = "[ 󱞩](bold red)"
+vimcmd_symbol = "[  󱞩](bold green)"

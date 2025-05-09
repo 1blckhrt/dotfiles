@@ -31,3 +31,20 @@ eval "$(starship init zsh)"
 export EDITOR=nvim
 export VISUAL=$EDITOR
 
+gpush() {
+  git add .
+  git status
+
+  echo -n "Continue with commit and push? [y/N]: "
+  read -r reply
+  if [[ "$reply" != "y" && "$reply" != "Y" ]]; then
+    echo "Aborted."
+    return 1
+  fi
+
+  echo -n "Enter commit message: "
+  read -r message
+
+  git commit -am "$message"
+  git push
+}
