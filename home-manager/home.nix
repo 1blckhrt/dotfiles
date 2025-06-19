@@ -90,7 +90,6 @@
         ff = "fastfetch";
         c = "clear";
         x = "exit";
-        cat = "bat";
         tree = "lsd --tree";
         nv = "nvim .";
         reload = "source ~/.zshrc";
@@ -123,6 +122,48 @@
                    				builtin cd "$@"
                				fi
                			}
+
+          hugopost() {
+          # Ensure we're in a Hugo site directory
+          if [ ! -f "./hugo.toml" ] && [ ! -d "./content" ]; then
+            echo "❌ Not in Hugo blog directory (missing config file or content/ folder)."
+            return 1
+          fi
+
+          read "title?Enter post title: "
+          read "categories?Enter categories (comma-separated): "
+          read "tags?Enter tags (comma-separated): "
+
+          # Slugify the title
+          slug=$(echo "$title" | tr '[:upper:]' '[:lower:]' | sed 's/ /-/g' | sed 's/[^a-z0-9-]//g')
+          datetime=$(date +"%Y-%m-%dT%H:%M:%S%z")
+          dirpath="content/posts/$slug"
+          filepath="$dirpath/index.md"
+
+          # Format list input for YAML
+          cat_array() {
+            echo $1 | sed -E 's/^[[:space:]]+|[[:space:]]+$//g' | tr ',' '\n' | sed 's/^ */"/;s/ *$/"/' | paste -sd, -
+          }
+
+          categories_formatted=$(cat_array "$categories")
+          tags_formatted=$(cat_array "$tags")
+
+          mkdir -p "$dirpath"
+
+          cat > "$filepath" <<EOF
+        ---
+        title: "$title"
+        date: "$datetime"
+        draft: false
+        categories: [$categories_formatted]
+        tags: [$tags_formatted]
+        ---
+
+        EOF
+
+          echo "✅ Created post: $filepath"
+          nvim "$filepath"
+        }
       '';
     };
 
