@@ -1,6 +1,9 @@
-{ config, pkgs, inputs, ... }:
-
 {
+  config,
+  pkgs,
+  inputs,
+  ...
+}: {
   home.username = "blckhrt";
   home.homeDirectory = "/home/blckhrt";
   nixpkgs.config.allowUnfree = true;
@@ -9,6 +12,7 @@
     ./programs/tmux/default.nix
     ./programs/kitty/default.nix
     ./programs/nvim/default.nix
+    ./programs/starship/default.nix
     inputs.nixvim.homeManagerModules.nixvim
   ];
   home.packages = with pkgs; [
@@ -59,26 +63,22 @@
       };
     };
 
-    gh = { enable = true; };
+    gh = {enable = true;};
 
-    fzf = { enable = true; };
+    fzf = {enable = true;};
 
-    tmux = { enable = true; };
+    ripgrep = {enable = true;};
 
-    ripgrep = { enable = true; };
+    bat = {enable = true;};
 
-    starship = { enable = true; };
-
-    bat = { enable = true; };
-
-    lsd = { enable = true; };
+    lsd = {enable = true;};
 
     zoxide = {
       enable = true;
       enableZshIntegration = true;
     };
 
-    btop = { enable = true; };
+    btop = {enable = true;};
 
     zsh = {
       enable = true;
@@ -177,8 +177,7 @@
     };
   };
 
-  home.sessionVariables = { EDITOR = "nvim"; };
-
+  home.sessionVariables = {EDITOR = "nvim";};
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 }

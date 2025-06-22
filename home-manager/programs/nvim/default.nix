@@ -1,5 +1,9 @@
-{ config, pkgs, inputs, ... }:
 {
+  config,
+  pkgs,
+  inputs,
+  ...
+}: {
   imports = [
     ./cmp.nix
     ./lsp.nix
@@ -46,25 +50,52 @@
       which-key.enable = true;
       treesitter = {
         enable = true;
-        settings.ensure_installed = ["python" "javascript" "typescript" "rust" "lua"];
+        settings.ensure_installed = ["python" "javascript" "typescript" "lua"];
       };
-
-      rustaceanvim.enable = true;
+      hop.enable = true;
       snacks.enable = true;
       trouble.enable = true;
       indent-blankline.enable = true;
       nvim-autopairs.enable = true;
       barbecue.enable = true;
       telescope.enable = true;
-      flash.enable = true;
       neocord.enable = true;
       noice.enable = true;
       neogit.enable = true;
-      yazi.enable = true;
       tiny-inline-diagnostic.enable = true;
+      project-nvim.enable = true;
+      vim-suda.enable = true;
+      notify.enable = true;
+      toggleterm.enable = true;
+      alpha = {
+        enable = true;
+        theme = "dashboard";
+      };
+      obsidian = {
+        enable = true;
+        settings.dir = "~/blckhrt_home/doc/notes";
+      };
     };
 
     keymaps = [
+      {
+        mode = ["n"];
+        key = "<CR>";
+        action = "<cmd>lua require('hop').hint_words()<CR>";
+        options = {
+          silent = true;
+          desc = "Hop to word";
+        };
+      }
+      {
+        mode = ["n"];
+        key = "<leader>p";
+        action = "<cmd>lua require('telescope').extensions.projects.projects({})<CR>";
+        options = {
+          silent = true;
+          desc = "Pick a project";
+        };
+      }
       {
         mode = [
           "n"
@@ -78,16 +109,10 @@
         };
       }
       {
-        key = ",";
+        key = "<C-t>";
         mode = ["n" "x" "o"];
         action = ":ToggleTerm direction=float size=0.5<CR>";
         options.desc = "Open Toggle Term";
-      }
-      {
-        key = "ff";
-        mode = ["n" "x" "o"];
-        action = ''<cmd>lua require("flash").jump()<cr>'';
-        options.desc = "Flash";
       }
       {
         mode = "n";
@@ -97,42 +122,6 @@
           noremap = true;
           silent = true;
         };
-      }
-      {
-        mode = "n";
-        key = "<leader>xx";
-        action = "<cmd>Trouble diagnostics toggle<cr>";
-        options.desc = "Diagnostics (Trouble)";
-      }
-      {
-        mode = "n";
-        key = "<leader>xX";
-        action = "<cmd>Trouble diagnostics toggle filter.buf=0<cr>";
-        options.desc = "Buffer Diagnostics (Trouble)";
-      }
-      {
-        mode = "n";
-        key = "<leader>cs";
-        action = "<cmd>Trouble symbols toggle focus=false<cr>";
-        options.desc = "Symbols (Trouble)";
-      }
-      {
-        mode = "n";
-        key = "<leader>cl";
-        action = "<cmd>Trouble lsp toggle focus=false win.position=right<cr>";
-        options.desc = "LSP Definitions / references / ... (Trouble)";
-      }
-      {
-        mode = "n";
-        key = "<leader>xL";
-        action = "<cmd>Trouble loclist toggle<cr>";
-        options.desc = "Location List (Trouble)";
-      }
-      {
-        mode = "n";
-        key = "<leader>xQ";
-        action = "<cmd>Trouble qflist toggle<cr>";
-        options.desc = "Quickfix List (Trouble)";
       }
       {
         mode = "n";
@@ -214,26 +203,20 @@
         options.desc = "[S]earch [/] in Open Files";
       }
       {
-        mode = "n";
-        key = "<leader>sn";
-        action = ''
-          <cmd>lua require("telescope.builtin").find_files({
-            cwd = vim.fn.stdpath("config")
-          })<CR>'';
-        options.desc = "[S]earch [N]eovim files";
-      }
-      {
         action = ":Neogit kind=auto<CR>";
         key = "<leader>g";
         mode = "n";
-        options.desc = "Magit for Vim";
+        options.desc = "Git for Neovim";
       }
     ];
 
     extraConfigLua = ''
-      vim.diagnostic.config({
-        virtual_text = false
-      })
+            vim.diagnostic.config({
+              virtual_text = false
+            })
+         require('telescope').load_extension('projects')
+
+      vim.keymap.set({"n", "v"}, ";", ":", { noremap = true })
     '';
   };
 }

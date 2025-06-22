@@ -1,7 +1,12 @@
 _: {
   programs.nixvim = {
     plugins = {
-      luasnip.enable = true;
+      luasnip = {
+        enable = true;
+        fromVscode = [{}];
+      };
+
+      friendly-snippets.enable = true;
 
       cmp = {
         enable = true;
@@ -57,7 +62,6 @@ _: {
       cmp-buffer.enable = true;
       cmp-path.enable = true;
       cmp_luasnip.enable = true;
-      cmp-cmdline.enable = false;
       cmp-emoji.enable = true;
       copilot-cmp.enable = true;
 
@@ -74,73 +78,82 @@ _: {
         mode = "symbol";
 
         symbolMap = {
-          Copilot = "AI";
-          Text = "Text";
-          Method = "Method";
-          Function = "Function";
-          Constructor = "Constructor";
-          Field = "Field";
-          Variable = "Variable";
-          Class = "Class";
-          Interface = "Interface";
-          Module = "Module";
-          Property = "Property";
-          Unit = "Unit";
-          Value = "Value";
-          Enum = "Enum";
-          Keyword = "Keyword";
-          Snippet = "Snippet";
-          Color = "Color";
-          File = "File";
-          Reference = "Reference";
-          Folder = "Folder";
-          EnumMember = "Enum Member";
-          Constant = "Constant";
-          Struct = "Struct";
-          Event = "Event";
-          Operator = "Operator";
-          TypeParameter = "TypeParameter";
-        };
-
-        extraOptions = {
-          maxwidth = 50;
-          ellipsis_char = "...";
+          Text = "󰉿";
+          Method = "󰆧";
+          Function = "󰊕";
+          Constructor = "";
+          Field = "󰜢";
+          Variable = "󰀫";
+          Class = "󰠱";
+          Interface = "";
+          Module = "󰅩";
+          Property = "󰜢";
+          Unit = "";
+          Value = "󰎠";
+          Enum = "";
+          Keyword = "󰌋";
+          Snippet = "";
+          Color = "󰏘";
+          File = "󰈔";
+          Reference = "󰈇";
+          Folder = "󰉋";
+          EnumMember = "";
+          Constant = "󰏿";
+          Struct = "󰙅";
+          Event = "";
+          Operator = "󰆕";
+          TypeParameter = "󰅲";
         };
       };
     };
 
     extraConfigLua = ''
-       local cmp = require'cmp'
+          local cmp = require'cmp'
 
-       -- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
-       cmp.setup.cmdline({'/', "?" }, {
-      	 sources = {
-      		 { name = 'buffer' }
-      	 }
+      cmp.setup({
+         window = {
+           completion = cmp.config.window.bordered(),
+           documentation = cmp.config.window.bordered(),
+         },
+         formatting = {
+           format = require("lspkind").cmp_format({
+             mode = "symbol_text", -- show symbol + text
+             maxwidth = 50,        -- truncate long labels
+             ellipsis_char = "…",
+           }),
+         },
        })
 
-      -- Set configuration for specific filetype.
-       cmp.setup.filetype('gitcommit', {
-      	 sources = cmp.config.sources({
-      		 { name = 'cmp_git' }, -- You can specify the `cmp_git` source if you were installed it.
-      	 }, {
-      		 { name = 'buffer' },
-      	 })
-       })
+          -- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
+          cmp.setup.cmdline({'/', "?" }, {
+         	 sources = {
+         		 { name = 'buffer' }
+         	 }
+          })
 
-       -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
-       cmp.setup.cmdline(':', {
-      	 sources = cmp.config.sources({
-      		 { name = 'path' }
-      	 }, {
-      		 { name = 'cmdline' }
-      	 })
-       })
+         -- Set configuration for specific filetype.
+          cmp.setup.filetype('gitcommit', {
+         	 sources = cmp.config.sources({
+         		 { name = 'cmp_git' }, -- You can specify the `cmp_git` source if you were installed it.
+         	 }, {
+         		 { name = 'buffer' },
+         	 })
+          })
 
-       require("copilot").setup({
-         suggestion = { enabled = false },
-        panel = { enabled = false },
-       })
+          -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
+          cmp.setup.cmdline(':', {
+         	 sources = cmp.config.sources({
+         		 { name = 'path' }
+         	 }, {
+         		 { name = 'cmdline' }
+         	 })
+          })
+
+          require("copilot").setup({
+            suggestion = { enabled = false },
+           panel = { enabled = false },
+          })
+
     '';
   };
 }
