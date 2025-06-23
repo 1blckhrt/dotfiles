@@ -12,17 +12,21 @@
     escapeTime = 0;
     historyLimit = 1000000;
 
-    extraConfig = ''
-      setw -g mode-keys vi
-      set -g @continuum-restore 'on'
+    plugins = with pkgs.tmuxPlugins; [
+      resurrect
+    ];
 
+    extraConfig = ''
+      # Load plugins
+      run-shell ${pkgs.tmuxPlugins.resurrect}/share/tmux-plugins/resurrect/resurrect.tmux
+
+      # Key bindings and settings
+      setw -g mode-keys vi
       bind d detach
       bind * list-clients
-
       bind | split-window -h -c "#{pane_current_path}"
       bind - split-window -v -c "#{pane_current_path}"
-
-      bind r source-file /home/blckhrt/.config/tmux/.tmux.conf
+      bind r source-file ~/.config/tmux/tmux.conf
       bind '"' choose-window
       bind h select-pane -L
       bind j select-pane -D
@@ -30,16 +34,26 @@
       bind l select-pane -R
       bind S choose-session
 
-
+      # Custom which-key menu
+      bind-key Space display-menu -T "tmux keybindings" \
+        "Sessions" s "choose-session" \
+        "Windows" w "choose-window" \
+        "" \
+        "Split horizontal" "|" "split-window -h -c '#{pane_current_path}'" \
+        "Split vertical" "-" "split-window -v -c '#{pane_current_path}'" \
+        "" \
+        "Pane left" h "select-pane -L" \
+        "Pane down" j "select-pane -D" \
+        "Pane up" k "select-pane -U" \
+        "Pane right" l "select-pane -R" \
+        "" \
+        "Detach" d detach \
+        "List clients" "*" list-clients \
+        "Reload config" r "source-file ~/.config/tmux/tmux.conf" \
+        "" \
+        "Save session (Resurrect)" "C-s" "run-shell '${pkgs.tmuxPlugins.resurrect}/share/tmux-plugins/resurrect/scripts/save.sh'" \
+        "Restore session (Resurrect)" "C-r" "run-shell '${pkgs.tmuxPlugins.resurrect}/share/tmux-plugins/resurrect/scripts/restore.sh'" \
+        "Show all keys" "?" list-keys
     '';
-
-    plugins = with pkgs.tmuxPlugins; [
-      tmux-fzf
-      nord
-      tmux-sessionx
-      resurrect
-      continuum
-      tmux-which-key
-    ];
   };
 }
