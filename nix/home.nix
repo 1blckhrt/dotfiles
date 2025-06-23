@@ -13,6 +13,7 @@
     ./programs/kitty/default.nix
     ./programs/nvim/default.nix
     ./programs/starship/default.nix
+    ./programs/ssh/default.nix
     inputs.nixvim.homeManagerModules.nixvim
   ];
   home.packages = with pkgs; [
