@@ -2,7 +2,6 @@
 
 set -euo pipefail
 
-# Customize these
 REPO_URL="https://github.com/1blckhrt/dotfiles.git"
 DOT_DIR="$HOME/dot"
 HM_SRC="$DOT_DIR/nix"
