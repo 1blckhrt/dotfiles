@@ -67,6 +67,7 @@
       vim-suda.enable = true;
       notify.enable = true;
       toggleterm.enable = true;
+      render-markdown.enable = true;
       alpha = {
         enable = true;
         theme = "dashboard";
@@ -74,6 +75,7 @@
       obsidian = {
         enable = true;
         settings.dir = "~/blckhrt_home/doc/notes";
+        settings.ui.enable = false;
       };
     };
 
