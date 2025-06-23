@@ -17,6 +17,7 @@
     inputs.nixvim.homeManagerModules.nixvim
   ];
   home.packages = with pkgs; [
+    mosh
     fzf
     google-chrome
     fd
