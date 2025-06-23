@@ -5,7 +5,7 @@ set -euo pipefail
 # Customize these
 REPO_URL="https://github.com/1blckhrt/dotfiles.git"
 DOT_DIR="$HOME/dot"
-HM_SRC="$DOT_DIR/home-manager"
+HM_SRC="$DOT_DIR/nix"
 HM_DEST="$HOME/.config/home-manager"
 
 # 1. Clone or update dotfiles repo

@@ -13,10 +13,15 @@
     };
   };
 
-  outputs = { nixpkgs, home-manager, nixvim, ... } @ inputs: {
+  outputs = {
+    nixpkgs,
+    home-manager,
+    nixvim,
+    ...
+  } @ inputs: {
     homeConfigurations."blckhrt" = home-manager.lib.homeManagerConfiguration {
       pkgs = nixpkgs.legacyPackages.x86_64-linux;
-      extraSpecialArgs = { inherit inputs; };
+      extraSpecialArgs = {inherit inputs;};
       modules = [
         ./home.nix
       ];
