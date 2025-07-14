@@ -16,6 +16,7 @@
     ./programs/ssh/default.nix
     inputs.nixvim.homeManagerModules.nixvim
   ];
+
   home.packages = with pkgs; [
     mosh
     fzf
@@ -65,22 +66,18 @@
       };
     };
 
-    gh = {enable = true;};
-
-    fzf = {enable = true;};
-
-    ripgrep = {enable = true;};
-
-    bat = {enable = true;};
-
-    lsd = {enable = true;};
+    gh.enable = true;
+    fzf.enable = true;
+    ripgrep.enable = true;
+    bat.enable = true;
+    lsd.enable = true;
 
     zoxide = {
       enable = true;
       enableZshIntegration = true;
     };
 
-    btop = {enable = true;};
+    btop.enable = true;
 
     zsh = {
       enable = true;
@@ -97,35 +94,36 @@
         reload = "source ~/.zshrc";
       };
       initContent = ''
+        export TERM=xterm-256color
         eval "$(direnv hook zsh)"
 
-            gpush() {
-            		git add .
-            			git status
+        gpush() {
+          git add .
+          git status
 
-            			echo -n "Continue with commit and push? [y/N]: "
-            			read -r reply
-            			if [[ "$reply" != "y" && "$reply" != "Y" ]]; then
-             					echo "Aborted."
-             					return 1
-            			fi
+          echo -n "Continue with commit and push? [y/N]: "
+          read -r reply
+          if [[ "$reply" != "y" && "$reply" != "Y" ]]; then
+            echo "Aborted."
+            return 1
+          fi
 
-            			echo -n "Enter commit message: "
-            			read -r message
+          echo -n "Enter commit message: "
+          read -r message
 
-            			git commit -am "$message"
-            			git push
-            }
+          git commit -am "$message"
+          git push
+        }
 
-            function cd() {
-               				if [[ $# -eq 0 ]]; then
-                   				builtin cd ~/blckhrt_home
-                 			else
-                   				builtin cd "$@"
-               				fi
-               			}
+        function cd() {
+          if [[ $# -eq 0 ]]; then
+            builtin cd ~/blckhrt_home
+          else
+            builtin cd "$@"
+          fi
+        }
 
-          hugopost() {
+        hugopost() {
           # Ensure we're in a Hugo site directory
           if [ ! -f "./hugo.toml" ] && [ ! -d "./content" ]; then
             echo "❌ Not in Hugo blog directory (missing config file or content/ folder)."
@@ -179,7 +177,10 @@
     };
   };
 
-  home.sessionVariables = {EDITOR = "nvim";};
+  home.sessionVariables = {
+    EDITOR = "nvim";
+  };
+
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 }
