@@ -94,6 +94,13 @@
         reload = "source ~/.zshrc";
       };
       initContent = ''
+        # fnm
+        FNM_PATH="/home/blckhrt/.local/share/fnm"
+        if [ -d "$FNM_PATH" ]; then
+          export PATH="/home/blckhrt/.local/share/fnm:$PATH"
+          eval "`fnm env`"
+        fi
+        
         export TERM=xterm-256color
         eval "$(direnv hook zsh)"
 

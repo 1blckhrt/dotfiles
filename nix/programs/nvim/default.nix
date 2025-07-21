@@ -38,7 +38,7 @@
       autoread = true;
       lazyredraw = true;
 
-      wrap = false;
+      wrap = true;
       linebreak = true;
       cursorline = true;
     };
