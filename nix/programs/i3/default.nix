@@ -8,7 +8,9 @@
 in {
   home.packages = with pkgs; [
     lightlocker
-    nerdfonts # Fonts utilised by rofi-power-menu
+    nerd-fonts.adwaita-mono
+    nerd-fonts.fira-code
+    nerd-fonts.jetbrains-mono
     rofi
     dmenu
     scrot

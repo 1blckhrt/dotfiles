@@ -36,7 +36,6 @@
     gh
     gcc
     brightnessctl
-    xbacklight
     wallust
     obsidian
     vesktop
@@ -48,7 +47,6 @@
     prismlauncher
     alejandra
     direnv
-    nerd-fonts.adwaita-mono
   ];
 
   programs = {
