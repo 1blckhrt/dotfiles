@@ -14,13 +14,13 @@
     ./programs/nvim/default.nix
     ./programs/starship/default.nix
     ./programs/ssh/default.nix
+    ./programs/i3/default.nix
     inputs.nixvim.homeManagerModules.nixvim
   ];
 
   home.packages = with pkgs; [
     mosh
     fzf
-    google-chrome
     fd
     tmux
     ripgrep
@@ -36,6 +36,7 @@
     gh
     gcc
     brightnessctl
+    xbacklight
     wallust
     obsidian
     vesktop
@@ -46,7 +47,6 @@
     vscode
     prismlauncher
     alejandra
-    nixfmt
     direnv
     nerd-fonts.adwaita-mono
   ];
@@ -100,7 +100,7 @@
           export PATH="/home/blckhrt/.local/share/fnm:$PATH"
           eval "`fnm env`"
         fi
-        
+
         export TERM=xterm-256color
         eval "$(direnv hook zsh)"
 
