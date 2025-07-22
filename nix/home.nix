@@ -23,6 +23,7 @@
     fzf
     fd
     tmux
+    ghostty
     ripgrep
     atuin
     starship
@@ -47,6 +48,7 @@
     prismlauncher
     alejandra
     direnv
+    kitty
   ];
 
   programs = {

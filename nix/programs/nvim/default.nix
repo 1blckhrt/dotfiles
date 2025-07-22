@@ -36,8 +36,6 @@
       incsearch = true;
 
       autoread = true;
-      lazyredraw = true;
-
       wrap = true;
       linebreak = true;
       cursorline = true;
