@@ -11,7 +11,7 @@
   ];
   programs.nixvim.enable = true;
 
-	programs.nixvim.plugins.lazy.enable = true;
+  programs.nixvim.plugins.lazy.enable = true;
 
   programs.nixvim = {
     viAlias = true;
@@ -41,13 +41,14 @@
       cursorline = true;
     };
 
-		colorschemes.nightfox = {
-			enable = true;
-			flavor = "carbonfox";
-		};
+    colorschemes.nightfox = {
+      enable = true;
+      flavor = "carbonfox";
+    };
 
     plugins = {
       web-devicons.enable = true;
+      neo-tree.enable = true;
       which-key.enable = true;
       treesitter = {
         enable = true;
@@ -201,6 +202,15 @@
         key = "<leader>g";
         mode = "n";
         options.desc = "Git for Neovim";
+      }
+      {
+        mode = "n";
+        key = "<C-n>";
+        action = "<cmd>Neotree toggle<CR>";
+        options = {
+          noremap = true;
+          silent = true;
+        };
       }
     ];
 
