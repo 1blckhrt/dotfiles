@@ -30,7 +30,7 @@ ln -sT "$HM_SRC" "$HM_DEST"
 # 4. Rebuild Home Manager config if available
 if command -v home-manager >/dev/null 2>&1; then
   echo "› Running home-manager switch"
-  home-manager switch -b backup
+  home-manager switch --flake .#blckhrt -b backup
 else
   echo "ℹ️  'home-manager' not found on PATH; skipping switch."
 fi

@@ -8,12 +8,12 @@
     ./cmp.nix
     ./lsp.nix
     ./lualine.nix
-    ./neotree.nix
   ];
   programs.nixvim.enable = true;
 
+	programs.nixvim.plugins.lazy.enable = true;
+
   programs.nixvim = {
-    plugins.lazy.enable = true;
     viAlias = true;
     vimAlias = true;
     globals.mapleader = " ";
@@ -41,7 +41,10 @@
       cursorline = true;
     };
 
-    colorschemes.nord.enable = true;
+		colorschemes.nightfox = {
+			enable = true;
+			flavor = "carbonfox";
+		};
 
     plugins = {
       web-devicons.enable = true;
@@ -113,15 +116,6 @@
         mode = ["n" "x" "o"];
         action = ":ToggleTerm direction=float size=0.5<CR>";
         options.desc = "Open Toggle Term";
-      }
-      {
-        mode = "n";
-        key = "<C-n>";
-        action = "<cmd>Neotree toggle<CR>";
-        options = {
-          noremap = true;
-          silent = true;
-        };
       }
       {
         mode = "n";
