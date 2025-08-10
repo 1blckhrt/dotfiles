@@ -4,7 +4,7 @@
   lib,
   ...
 }: let
-  starshipFormat = "[](#5e81ac)$os[ | ](fg:#2e3440 bg:#5e81ac)$username$hostname[](bg:#81a1c1 fg:#5e81ac)$directory[](bg:#d9dee9 fg:#8fbcbb)$cmd_duration[](fg:#d9dee9)$line_break$character";
+  starshipFormat = "[](#000000)$os[ | ](fg:white bg:#000000)$username $hostname[ | ](bg:#000000 fg:white)$directory[ | ](bg:#000000 fg:#d0d0d0)$cmd_duration[ > ](fg:#d0d0d0)$line_break$character";
 in {
   programs.starship = {
     enable = true;
@@ -15,14 +15,13 @@ in {
       add_newline = false;
 
       hostname = {
-        style = "fg:#2e3440 bg:#5e81ac";
-        format = "[$ssh_symbol$hostname]($style)";
+        style = "fg:white bg:#000000";
+        format = "$hostname";
         ssh_only = false;
-        ssh_symbol = " ";
       };
 
       os = {
-        style = "fg:#2e3440 bg:#5e81ac";
+        style = "fg:white bg:#000000";
         disabled = false;
         symbols = {
           Windows = "󰍲";
@@ -50,33 +49,33 @@ in {
 
       username = {
         show_always = true;
-        format = "[$user]($style)";
-        style_user = "fg:#2e3440 bg:#5e81ac";
+        format = "$user";
+        style_user = "fg:white bg:#000000";
       };
 
       directory = {
-        style = "fg:#2e3440 bg:#81a1c1";
+        style = "fg:white bg:#000000";
         read_only = " ";
         format = "[ 󰉋 $path ]($style)[$read_only]($read_only_style)";
-        read_only_style = "fg:#2e3440 bold bg:#81a1c1";
+        read_only_style = "fg:white bold bg:#000000";
       };
 
       sudo = {
         disabled = false;
         symbol = " ";
-        style = "fg:#2e3440 bg:#d9dee9";
+        style = "fg:white bg:#000000";
         format = "[ $symbol]($style)";
       };
 
       cmd_duration = {
         format = "[ 󰔚 $duration ]($style)";
-        style = "fg:#2e3440 bg:#d9dee9";
+        style = "fg:white bg:#000000";
       };
 
       character = {
-        success_symbol = "[ 󱞩](bold green)";
-        error_symbol = "[ 󱞩](bold red)";
-        vimcmd_symbol = "[  󱞩](bold green)";
+        success_symbol = "[ 󱞩](bold white)";
+        error_symbol = "[ 󱞩](bold white)";
+        vimcmd_symbol = "[  󱞩](bold white)";
       };
     };
   };

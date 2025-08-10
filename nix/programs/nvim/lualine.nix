@@ -5,6 +5,7 @@ _: {
       options = {
         icons_enabled = true;
         theme = "auto";
+        globalstatus = true;
         component_separators = {
           left = "|";
           right = "|";
@@ -13,18 +14,18 @@ _: {
           left = "";
           right = "";
         };
-        disabled_filetypes = [ "neo-tree" ];
+        disabled_filetypes = ["neo-tree"];
       };
 
       sections = {
-        lualine_a = [ "mode" ];
-        lualine_b = [ "branch" "diff" ];
-        lualine_c = [ "filename" ];
+        lualine_a = ["mode"];
+        lualine_b = ["branch" "diff"];
+        lualine_c = ["filename"];
         lualine_x = [
           {
             name = "diagnostics";
             options = {
-              sources = [ "nvim_diagnostic" ];
+              sources = ["nvim_diagnostic"];
               symbols = {
                 error = " ";
                 warn = " ";
@@ -42,8 +43,8 @@ _: {
           "fileformat"
           "filetype"
         ];
-        lualine_y = [ "progress" ];
-        lualine_z = [ "location" ];
+        lualine_y = ["progress"];
+        lualine_z = ["location"];
       };
     };
   };
