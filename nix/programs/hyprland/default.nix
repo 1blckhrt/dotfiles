@@ -11,6 +11,8 @@
     hyprpaper
     waybar
   ];
+  services.swaync.enable = true;
+  wayland.windowManager.hyprland.enable = true;
   wayland.windowManager.hyprland.settings = {
     cursor = {
       no_hardware_cursors = true;

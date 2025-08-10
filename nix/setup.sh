@@ -2,6 +2,11 @@
 
 set -euo pipefail
 
+user=$(whoami)
+host=$(hostname)
+
+flake_ref="${user}@${host}"
+
 REPO_URL="https://github.com/1blckhrt/dotfiles.git"
 DOT_DIR="$HOME/dot"
 HM_SRC="$DOT_DIR/nix"
@@ -30,7 +35,7 @@ ln -sT "$HM_SRC" "$HM_DEST"
 # 4. Rebuild Home Manager config if available
 if command -v home-manager >/dev/null 2>&1; then
   echo "› Running home-manager switch"
-  home-manager switch --flake .#blckhrt -b backup-file
+  home-manager switch --flake .#${flake_ref} -b backup-file
 else
   echo "ℹ️  'home-manager' not found on PATH; skipping switch."
 fi

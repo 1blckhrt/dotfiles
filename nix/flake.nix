@@ -19,12 +19,22 @@
     nixvim,
     ...
   } @ inputs: {
-    homeConfigurations."blckhrt" = home-manager.lib.homeManagerConfiguration {
-      pkgs = nixpkgs.legacyPackages.x86_64-linux;
-      extraSpecialArgs = {inherit inputs;};
-      modules = [
-        ./home.nix
-      ];
+    homeConfigurations = {
+      "blckhrt@pc" = home-manager.lib.homeManagerConfiguration {
+        pkgs = nixpkgs.legacyPackages.x86_64-linux;
+        extraSpecialArgs = {inherit inputs;};
+        modules = [
+          ./home/desktop.nix
+        ];
+      };
+
+      "blckhrt@dev-server" = home-manager.lib.homeManagerConfiguration {
+        pkgs = nixpkgs.legacyPackages.x86_64-linux;
+        extraSpecialArgs = {inherit inputs;};
+        modules = [
+          ./home/dev-server.nix
+        ];
+      };
     };
   };
 }
