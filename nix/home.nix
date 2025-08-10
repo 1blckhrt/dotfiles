@@ -4,8 +4,7 @@
   inputs,
   lib,
   ...
-}:
- {
+}: {
   home.username = "blckhrt";
   home.homeDirectory = "/home/blckhrt";
   nixpkgs.config.allowUnfree = true;
@@ -50,7 +49,6 @@
     prismlauncher
     alejandra
     direnv
-
   ];
 
   programs = {

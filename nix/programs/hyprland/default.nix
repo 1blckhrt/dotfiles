@@ -1,5 +1,20 @@
 {
+  config,
+  pkgs,
+  inputs,
+  lib,
+  ...
+}: {
+  home.packages = with pkgs; [
+    wofi
+    swaynotificationcenter
+    hyprpaper
+    waybar
+  ];
   wayland.windowManager.hyprland.settings = {
+    cursor = {
+      no_hardware_cursors = true;
+    };
     # This is an example Hyprland config file for Nix.
     # Refer to the wiki for more information.
     # https://wiki.hypr.land/Configuring/
@@ -158,7 +173,6 @@
         "workspaces, 1, 1.94, almostLinear, fade"
         "workspacesIn, 1, 1.21, almostLinear, fade"
         "workspacesOut, 1, 1.94, almostLinear, fade"
-        "zoomFactor, 1, 7, quick"
       ];
     };
 
