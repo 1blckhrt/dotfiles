@@ -3,6 +3,7 @@
   pkgs,
   inputs,
   lib,
+  nixGL,
   ...
 }: {
   home.packages = with pkgs; [

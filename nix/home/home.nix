@@ -3,16 +3,20 @@
   pkgs,
   inputs,
   lib,
+  nixGL,
   ...
 }: {
   home.username = "blckhrt";
   home.homeDirectory = "/home/blckhrt";
-  nixpkgs.config.allowUnfree = true;
+  nixpkgs.config = {
+    allowUnfree = true;
+    allowUnfreePredicate = pkg: true;
+  };
   home.stateVersion = "25.05"; # DO NOT TOUCH
 
   nixGL = {
     packages = nixGL.packages;
-    defaultWrapper = "nvidia";
+    defaultWrapper = "mesa";
   };
 
   imports = [
