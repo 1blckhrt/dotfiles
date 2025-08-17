@@ -11,28 +11,29 @@
       url = "github:nix-community/nixvim";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nixGL = {
+      url = "github:nix-community/nixGL";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = {
+    self,
     nixpkgs,
     home-manager,
     nixvim,
+    nixGL,
     ...
   } @ inputs: {
     homeConfigurations = {
       "blckhrt@pc" = home-manager.lib.homeManagerConfiguration {
         pkgs = nixpkgs.legacyPackages.x86_64-linux;
-        extraSpecialArgs = {inherit inputs;};
+        extraSpecialArgs = {
+          inherit inputs;
+          inherit nixGL;
+        };
         modules = [
-          ./home/desktop.nix
-        ];
-      };
-
-      "blckhrt@dev-server" = home-manager.lib.homeManagerConfiguration {
-        pkgs = nixpkgs.legacyPackages.x86_64-linux;
-        extraSpecialArgs = {inherit inputs;};
-        modules = [
-          ./home/dev-server.nix
+          ./home/home.nix
         ];
       };
     };

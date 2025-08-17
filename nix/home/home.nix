@@ -9,12 +9,20 @@
   home.homeDirectory = "/home/blckhrt";
   nixpkgs.config.allowUnfree = true;
   home.stateVersion = "25.05"; # DO NOT TOUCH
+
+  nixGL = {
+    packages = nixGL.packages;
+    defaultWrapper = "nvidia";
+  };
+
   imports = [
     ../programs/tmux/default.nix
     ../programs/nvim/default.nix
     ../programs/starship/default.nix
     ../programs/ssh/default.nix
     inputs.nixvim.homeManagerModules.nixvim
+    ../programs/hyprland/default.nix
+    ../programs/kitty/default.nix
   ];
 
   home.packages = with pkgs; [
@@ -37,7 +45,12 @@
     uv
     alejandra
     direnv
+    (config.lib.nixGL.wrap ghostty)
   ];
+
+  xdg.configFile."environment.d/envvars.conf".text = ''
+    PATH="$HOME/.nix-profile/bin:$PATH"
+  '';
 
   programs = {
     git = {
