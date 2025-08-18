@@ -68,7 +68,7 @@ _: {
       copilot-lua = {
         enable = true;
         settings = {
-          suggestion = {enabled = false;};
+          suggestion = {enabled = true;};
           panel = {enabled = false;};
         };
       };
@@ -147,11 +147,6 @@ _: {
          	 }, {
          		 { name = 'cmdline' }
          	 })
-          })
-
-          require("copilot").setup({
-            suggestion = { enabled = false },
-           panel = { enabled = false },
           })
 
     '';

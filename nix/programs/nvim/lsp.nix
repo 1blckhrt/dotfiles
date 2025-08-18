@@ -7,7 +7,8 @@ _: {
       servers = {
         ts_ls.enable = true;
         eslint.enable = true;
-        pyright.enable = true;
+        basedpyright.enable = true;
+        ruff.enable = true;
       };
     };
 

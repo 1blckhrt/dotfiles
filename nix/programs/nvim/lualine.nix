@@ -7,12 +7,12 @@ _: {
         theme = "auto";
         globalstatus = true;
         component_separators = {
-          left = "|";
-          right = "|";
+          left = "";
+          right = "";
         };
         section_separators = {
-          left = "";
-          right = "";
+          left = "";
+          right = "";
         };
         disabled_filetypes = ["neo-tree"];
       };

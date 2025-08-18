@@ -42,10 +42,16 @@
     };
 
     extraPlugins = [
-      pkgs.vimPlugins.lackluster-nvim
+      (pkgs.vimUtils.buildVimPlugin {
+        name = "vim-monotone";
+        src = pkgs.fetchFromGitHub {
+          owner = "Lokaltog";
+          repo = "vim-monotone";
+          rev = "master"; # or pin a commit for stability
+          hash = "sha256-BMN+3pgF7NgMkEpmMNTjZmSjWiVliBkwzQ9vw+Mq33M="; # run nix-prefetch-github for this
+        };
+      })
     ];
-
-    colorscheme = "lackluster";
 
     plugins = {
       telescope = {
@@ -230,13 +236,15 @@
     ];
 
     extraConfigLua = ''
-      local telescope_ui = require("telescope.themes")
+      vim.cmd("colorscheme monotone")
 
-      vim.diagnostic.config({
-        virtual_text = false
-      })
+          local telescope_ui = require("telescope.themes")
 
-      require('telescope').load_extension('projects')
+          vim.diagnostic.config({
+            virtual_text = true
+          })
+
+          require('telescope').load_extension('projects')
     '';
   };
 }

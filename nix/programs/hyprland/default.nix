@@ -9,15 +9,18 @@
   home.packages = with pkgs; [
     wofi
     swaynotificationcenter
-    hyprpaper
     waybar
+    hyprshot
+    swww
   ];
 
   services.swaync.enable = true;
+  services.swww.enable = true;
 
   wayland.windowManager.hyprland = {
     enable = true;
     package = config.lib.nixGL.wrap pkgs.hyprland;
+
     settings = {
       cursor = {
         no_hardware_cursors = true;
@@ -50,7 +53,7 @@
         rounding = 10;
         rounding_power = 2;
         active_opacity = 1.0;
-        inactive_opacity = 1.0;
+        inactive_opacity = 0.85;
 
         shadow = {
           enabled = true;
@@ -62,7 +65,7 @@
         blur = {
           enabled = true;
           size = 3;
-          passes = 1;
+          passes = 3;
           vibrancy = 0.1696;
         };
       };
@@ -202,5 +205,14 @@
         "nofocus,class:^$,title:^$,xwayland:1,floating:1,fullscreen:0,pinned:0"
       ];
     };
+
+    extraConfig = ''
+         # Start wallpaper daemon once
+         exec = swww-daemon
+         exec-once = sleep 1 && swww img --transition-type=wipe --transition-angle=30 --transition-step=90 ~/Pictures/wallpapers/wallhaven-n6d38w.jpg
+
+         # Restart waybar on startup *and* reload
+      exec = pkill waybar && hyprctl dispatch exec waybar
+    '';
   };
 }

@@ -4,7 +4,7 @@
   lib,
   ...
 }: let
-  starshipFormat = "[](#000000)$os[ | ](fg:white bg:#000000)$username $hostname[ | ](bg:#000000 fg:white)$directory[ | ](bg:#000000 fg:#d0d0d0)$cmd_duration[ > ](fg:#d0d0d0)$line_break$character";
+  starshipFormat = "[](#000000)$os[ | ](fg:white bg:#000000)$username $hostname[ | ](bg:#000000 fg:white)$directory[ | ](bg:#000000 fg:#d0d0d0)$cmd_duration[ > ](fg:#d0d0d0)";
 in {
   programs.starship = {
     enable = true;

@@ -11,7 +11,8 @@
       window_padding_width = 10;
       bold_font = "auto";
       italic_font = "auto";
-      cursor_trail = 3;
+      mouse_hide_wait = 0;
+      # cursor_trail = 3;
     };
     font = {
       name = "Adwaita Mono Nerd Font";
