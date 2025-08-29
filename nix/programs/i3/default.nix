@@ -8,30 +8,30 @@
 }: {
   xsession.windowManager.i3 = {
     enable = true;
-    extraPackages = with pkgs; [
-      i3status
-      arandr
-      dex
-      feh
-      dunst
-      picom
-      i3lock
-      i3status
-      picom
-      xautolock
-      volumeicon
-      brightnessctl
-      bluez
-      bluez-utils
-      xfce4-power-manager
-      polkit-gnome
-      networkmanagerapplet
-      lxappearance
-      clipit
-      flameshot
-      pavucontrol
-    ];
   };
+  home.packages = with pkgs; [
+    i3status
+    arandr
+    dex
+    dunst
+    feh
+    i3lock
+    i3status
+    picom
+    xautolock
+    volumeicon
+    brightnessctl
+    bluez
+    xfce.xfce4-power-manager
+    polkit_gnome
+    networkmanagerapplet
+    lxappearance
+    clipit
+    flameshot
+    pavucontrol
+    dunst
+    picom
+  ];
 
   home.file.".config/i3/config".source = ./config;
   home.file.".config/i3/scripts" = {
@@ -39,4 +39,6 @@
     recursive = true;
     executable = true;
   };
+
+  home.file.".local/share/xsessions/i3.desktop".source = ./i3.desktop;
 }

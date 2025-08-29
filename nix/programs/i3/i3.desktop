@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=i3 (Nix + Home Manager)
+Comment=Dynamic tiling window manager
+Exec=i3
+TryExec=i3
+Type=Application
+X-LightDM-DesktopName=i3
+
