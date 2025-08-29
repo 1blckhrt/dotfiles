@@ -1,6 +1,14 @@
 {
+  config,
+  pkgs,
+  inputs,
+  lib,
+  nixGL,
+  ...
+}: {
   programs.kitty = {
     enable = true;
+    package = config.lib.nixGL.wrap pkgs.kitty;
     environment = {
       KITTY_DISABLE_OPENGLES = "1";
     };

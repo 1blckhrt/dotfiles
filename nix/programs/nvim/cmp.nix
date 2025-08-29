@@ -22,7 +22,6 @@ _: {
           formatting = {fields = ["kind" "abbr" "menu"];};
           sources = [
             {name = "nvim_lsp";}
-            {name = "emoji";}
             {
               name = "buffer"; # text within current buffer
               option.get_bufnrs.__raw = "vim.api.nvim_list_bufs";
@@ -62,13 +61,12 @@ _: {
       cmp-buffer.enable = true;
       cmp-path.enable = true;
       cmp_luasnip.enable = true;
-      cmp-emoji.enable = true;
       copilot-cmp.enable = true;
 
       copilot-lua = {
         enable = true;
         settings = {
-          suggestion = {enabled = true;};
+          suggestion = {enabled = false;};
           panel = {enabled = false;};
         };
       };
@@ -148,6 +146,11 @@ _: {
          		 { name = 'cmdline' }
          	 })
           })
+
+          require("copilot").setup({
+         suggestion = { enabled = true },
+        panel = { enabled = true },
+       })
 
     '';
   };

@@ -4,7 +4,7 @@ _: {
     settings = {
       options = {
         icons_enabled = true;
-        theme = "auto";
+        theme = "lackluster";
         globalstatus = true;
         component_separators = {
           left = "";
@@ -14,7 +14,6 @@ _: {
           left = "";
           right = "";
         };
-        disabled_filetypes = ["neo-tree"];
       };
 
       sections = {
@@ -32,14 +31,8 @@ _: {
                 info = " ";
                 hint = " ";
               };
-              cond = ''
-                function()
-                  return vim.bo.filetype ~= "neo-tree"
-                end
-              '';
             };
           }
-          "encoding"
           "fileformat"
           "filetype"
         ];

@@ -26,7 +26,7 @@
     ...
   } @ inputs: {
     homeConfigurations = {
-      "blckhrt@pc" = home-manager.lib.homeManagerConfiguration {
+      "blckhrt@laptop" = home-manager.lib.homeManagerConfiguration {
         pkgs = nixpkgs.legacyPackages.x86_64-linux;
         extraSpecialArgs = {
           inherit inputs;

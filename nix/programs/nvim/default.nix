@@ -42,34 +42,73 @@
     };
 
     extraPlugins = [
-      (pkgs.vimUtils.buildVimPlugin {
-        name = "vim-monotone";
-        src = pkgs.fetchFromGitHub {
-          owner = "Lokaltog";
-          repo = "vim-monotone";
-          rev = "master"; # or pin a commit for stability
-          hash = "sha256-BMN+3pgF7NgMkEpmMNTjZmSjWiVliBkwzQ9vw+Mq33M="; # run nix-prefetch-github for this
-        };
-      })
+      pkgs.vimPlugins.lackluster-nvim
     ];
 
     plugins = {
       telescope = {
         enable = true;
-        defaults = {
-          layout_strategy = "horizontal";
-          sorting_strategy = "ascending";
-          layout_config = {prompt_position = "top";};
-          winblend = 0;
+        extensions = {
+          fzf-native.enable = true;
+        };
+        keymaps = {
+          "<leader>sh" = "help_tags";
+          "<leader>sk" = "keymaps";
+          "<leader><leader>" = "find_files";
+          "<leader>ss" = "builtin";
+          "<leader>sw" = "grep_string";
+          "<leader>sg" = "live_grep";
+          "<leader>sd" = "diagnostics";
+          "<leader>sr" = "resume";
+          "<leader>s." = "oldfiles";
+          "<leader>/" = {
+            action = "current_buffer_fuzzy_find";
+            options.desc = "[/] Fuzzily search in current buffer";
+          };
+        };
+        settings = {
+          defaults = {
+            prompt_prefix = "   ";
+            selection_caret = " ";
+            entry_prefix = " ";
+            sorting_strategy = "ascending";
+
+            layout_config = {
+              horizontal = {
+                prompt_position = "top";
+                preview_width = 0.55;
+              };
+              width = 0.87;
+              height = 0.80;
+            };
+
+            mappings = {
+              i = {
+                "<C-j>" = "move_selection_next";
+                "<C-k>" = "move_selection_previous";
+              };
+              n = {
+                q = "close";
+              };
+            };
+          };
         };
       };
+
       web-devicons.enable = true;
-      neo-tree.enable = true;
+      nvim-tree.enable = true;
       which-key.enable = true;
+      snacks.enable = true;
+      render-markdown.enable = true;
+      tiny-inline-diagnostic.enable = true;
+      alpha = {
+        enable = true;
+        theme = "dashboard";
+      };
 
       treesitter = {
         enable = true;
-        settings.ensure_installed = [
+        ensureInstalled = [
           "python"
           "javascript"
           "typescript"
@@ -79,22 +118,24 @@
       };
 
       hop.enable = true;
-      snacks.enable = true;
       indent-blankline.enable = true;
       nvim-autopairs.enable = true;
       barbecue.enable = true;
       neocord.enable = true;
       noice.enable = true;
-      tiny-inline-diagnostic.enable = true;
-      rustaceanvim.enable = true;
-      project-nvim.enable = true;
-      vim-suda.enable = true;
       notify.enable = true;
-      toggleterm.enable = true;
+      tmux-navigator.enable = true;
 
-      alpha = {
+      obsidian = {
         enable = true;
-        theme = "dashboard";
+        settings = {
+          workspaces = [
+            {
+              name = "main";
+              path = "~/Documents/Notes/";
+            }
+          ];
+        };
       };
     };
 
@@ -105,7 +146,6 @@
         action = ":";
         options = {
           noremap = true;
-          silent = false;
         };
       }
       {
@@ -118,15 +158,6 @@
         };
       }
       {
-        mode = ["n"];
-        key = "<leader>p";
-        action = "<cmd>lua require('telescope').extensions.projects.projects({})<CR>";
-        options = {
-          silent = true;
-          desc = "Pick a project";
-        };
-      }
-      {
         mode = ["n" "v"];
         key = "<leader>f";
         action = "<cmd>lua vim.lsp.buf.format()<cr>";
@@ -136,115 +167,28 @@
         };
       }
       {
-        key = "<C-t>";
-        mode = ["n" "x" "o"];
-        action = ":ToggleTerm direction=float size=0.5<CR>";
-        options = {
-          desc = "Open Toggle Term";
-        };
-      }
-      {
-        mode = ["n"];
-        key = "<leader>sh";
-        action = "<cmd>lua require('telescope.builtin').help_tags()<CR>";
-        options = {desc = "[S]earch [H]elp";};
-      }
-      {
-        mode = ["n"];
-        key = "<leader>sk";
-        action = "<cmd>lua require('telescope.builtin').keymaps()<CR>";
-        options = {desc = "[S]earch [K]eymaps";};
-      }
-      {
-        mode = ["n"];
-        key = "<leader>sf";
-        action = "<cmd>lua require('telescope.builtin').find_files()<CR>";
-        options = {desc = "[S]earch [F]iles";};
-      }
-      {
-        mode = ["n"];
-        key = "<leader>ss";
-        action = "<cmd>lua require('telescope.builtin').builtin()<CR>";
-        options = {desc = "[S]earch [S]elect Telescope";};
-      }
-      {
-        mode = ["n"];
-        key = "<leader>sw";
-        action = "<cmd>lua require('telescope.builtin').grep_string()<CR>";
-        options = {desc = "[S]earch current [W]ord";};
-      }
-      {
-        mode = ["n"];
-        key = "<leader>sg";
-        action = "<cmd>lua require('telescope.builtin').live_grep()<CR>";
-        options = {desc = "[S]earch by [G]rep";};
-      }
-      {
-        mode = ["n"];
-        key = "<leader>sd";
-        action = "<cmd>lua require('telescope.builtin').diagnostics()<CR>";
-        options = {desc = "[S]earch [D]iagnostics";};
-      }
-      {
-        mode = ["n"];
-        key = "<leader>sr";
-        action = "<cmd>lua require('telescope.builtin').resume()<CR>";
-        options = {desc = "[S]earch [R]esume";};
-      }
-      {
-        mode = ["n"];
-        key = "<leader>s.";
-        action = "<cmd>lua require('telescope.builtin').oldfiles()<CR>";
-        options = {desc = "[S]earch Recent Files";};
-      }
-      {
-        mode = ["n"];
-        key = "<leader><leader>";
-        action = "<cmd>lua require('telescope.builtin').find_files()<CR>";
-        options = {desc = "Find files";};
-      }
-      {
-        mode = ["n"];
-        key = "<leader>/";
-        action = ''
-          <cmd>lua require("telescope.builtin").current_buffer_fuzzy_find(
-            require("telescope.themes").get_dropdown({ winblend = 10, previewer = false })
-          )<CR>
-        '';
-        options = {desc = "[/] Fuzzily search in current buffer";};
-      }
-      {
-        mode = ["n"];
-        key = "<leader>s/";
-        action = ''
-          <cmd>lua require("telescope.builtin").live_grep({
-            grep_open_files = true,
-            prompt_title = "Live Grep in Open Files"
-          })<CR>
-        '';
-        options = {desc = "[S]earch [/] in Open Files";};
-      }
-      {
         mode = ["n"];
         key = "<C-n>";
-        action = "<cmd>Neotree toggle<CR>";
+        action = ":NvimTreeToggle<CR>";
         options = {
           noremap = true;
           silent = true;
         };
       }
+      {
+        mode = ["n"];
+        key = "<leader>e";
+        action = ":NvimTreeToggle<CR>";
+        options = {
+          noremap = true;
+          silent = true;
+          desc = "Toggle NvimTree";
+        };
+      }
     ];
 
     extraConfigLua = ''
-      vim.cmd("colorscheme monotone")
-
-          local telescope_ui = require("telescope.themes")
-
-          vim.diagnostic.config({
-            virtual_text = true
-          })
-
-          require('telescope').load_extension('projects')
+      vim.cmd("colorscheme lackluster")
     '';
   };
 }

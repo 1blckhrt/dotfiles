@@ -9,6 +9,7 @@ _: {
         eslint.enable = true;
         basedpyright.enable = true;
         ruff.enable = true;
+        marksman.enable = true;
       };
     };
 
@@ -55,14 +56,14 @@ _: {
       settings = {
         format_on_save = {
           lspFallback = true;
-          timeoutMs = 2000;
+          timeoutMs = 500;
         };
 
         notify_on_error = true;
 
         formatters_by_ft =
           {
-            python = ["black"];
+            python = ["black" "ruff" "pyrefly"];
             lua = ["stylua"];
             nix = ["alejandra"];
             rust = ["rustfmt"];

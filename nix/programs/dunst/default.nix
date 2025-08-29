@@ -6,8 +6,9 @@
   nixGL,
   ...
 }: {
-  programs.tmux = {
+  services.dunst = {
     enable = true;
   };
-  home.file.".tmux.conf".source = ./tmux.conf;
+
+  home.file.".config/dunst/dunstrc".source = ./dunstrc;
 }
