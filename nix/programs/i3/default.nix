@@ -11,6 +11,10 @@
     extraPackages = with pkgs; [
       i3status
       arandr
+      dex
+      feh
+      dunst
+      picom
       i3lock
       i3status
       picom
