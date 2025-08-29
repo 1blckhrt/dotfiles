@@ -22,10 +22,15 @@
   };
 
   imports = [
+    inputs.nixvim.homeManagerModules.nixvim
+    ../programs/i3/default.nix
+    ../programs/tmux/default.nix
+    ../programs/dunst/default.nix
+    ../programs/misc/default.nix
+    ../programs/picom/default.nix
     ../programs/nvim/default.nix
     ../programs/starship/default.nix
     ../programs/ssh/default.nix
-    inputs.nixvim.homeManagerModules.nixvim
     ../programs/kitty/default.nix
   ];
 
