@@ -31,9 +31,12 @@
     ../programs/alacritty/default.nix
     ../programs/rofi/default.nix
     ../programs/dunst/default.nix
+    ../programs/tmux/default.nix
   ];
 
   home.packages = with pkgs; [
+    coreutils
+    python3
     mosh
     fzf
     fd
