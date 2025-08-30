@@ -39,6 +39,13 @@ in {
     terminal = "screen-256color";
 
     plugins = with pkgs.tmuxPlugins; [
+      tmux2k
+      {
+        plugin = tmuxWhichKey;
+        extraConfig = ''
+          set -g @tmux-which-key-xdg-enable 1
+        '';
+      }
       {
         plugin = resurrect;
         extraConfig = ''
@@ -60,17 +67,10 @@ in {
         plugin = continuum;
         extraConfig = ''
           set -g @continuum-restore 'on'
-          set -g @continuum-save-interval '5'
+          set -g @continuum-save-interval '1'
           set -g @continuum-save-bash-history 'on'
           set -g @continuum-save-zsh-history 'on'
           set -g @continuum-save-shell-history 'on'
-        '';
-      }
-      tmux2k
-      {
-        plugin = tmuxWhichKey;
-        extraConfig = ''
-          set -g @tmux-which-key-xdg-enable 1
         '';
       }
     ];
@@ -89,7 +89,7 @@ in {
 
       set -g @tmux2k-theme 'duo'
       set -g @tmux2k-left-plugins "session"
-      set -g @tmux2k-right-plugins "battery time"
+      set -g @tmux2k-right-plugins "network"
 
       set -g @which-key-popup-time 0.01
 
@@ -119,8 +119,6 @@ in {
     Service = {
       Type = "forking";
       ExecStart = "${pkgs.tmux}/bin/tmux new-session -d -s default";
-      ExecStop = "${pkgs.tmux}/bin/tmux kill-server";
-      Environment = "PATH=${lib.makeBinPath [pkgs.tmux pkgs.coreutils]}";
       RemainAfterExit = true;
       Restart = "on-failure";
     };
