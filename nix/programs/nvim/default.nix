@@ -123,7 +123,6 @@
       barbecue.enable = true;
       neocord.enable = true;
       noice.enable = true;
-      notify.enable = true;
       tmux-navigator.enable = true;
 
       obsidian = {
@@ -183,6 +182,16 @@
           noremap = true;
           silent = true;
           desc = "Toggle NvimTree";
+        };
+      }
+      {
+        mode = ["n" "v" "i"];
+        key = "<C-s>";
+        action = "<cmd>w<CR>";
+        options = {
+          noremap = true;
+          silent = true;
+          desc = "Save file";
         };
       }
     ];

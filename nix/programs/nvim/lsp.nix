@@ -1,5 +1,6 @@
 _: {
   programs.nixvim.plugins = {
+    lsp-signature.enable = true;
     lsp-format.enable = true;
     lsp-lines.enable = true;
     lsp = {
@@ -21,7 +22,6 @@ _: {
       sources = {
         code_actions = {
           gitsigns.enable = true;
-          statix.enable = true;
         };
 
         diagnostics = {
@@ -66,7 +66,6 @@ _: {
             python = ["black" "ruff" "pyrefly"];
             lua = ["stylua"];
             nix = ["alejandra"];
-            rust = ["rustfmt"];
           }
           // builtins.listToAttrs (map (ft: {
               name = ft;

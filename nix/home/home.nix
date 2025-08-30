@@ -24,14 +24,11 @@
   imports = [
     inputs.nixvim.homeManagerModules.nixvim
     ../programs/i3/default.nix
-    ../programs/tmux/default.nix
-    ../programs/dunst/default.nix
     ../programs/misc/default.nix
-    ../programs/picom/default.nix
     ../programs/nvim/default.nix
     ../programs/starship/default.nix
     ../programs/ssh/default.nix
-    ../programs/kitty/default.nix
+    ../programs/alacritty/default.nix
   ];
 
   home.packages = with pkgs; [
@@ -57,7 +54,8 @@
     unzip
     pavucontrol
     playerctl
-    (config.lib.nixGL.wrap ghostty)
+    nerd-fonts.jetbrains-mono
+    (config.lib.nixGL.wrap alacritty)
   ];
 
   xdg.configFile."environment.d/envvars.conf".text = ''
@@ -253,6 +251,14 @@
     executable = true;
   };
 
+  home.file.".xinitrc" = {
+    text = ''
+      export DISPLAY=:0
+      exec i3
+    '';
+    executable = true;
+  };
+
   home.sessionPath = [
     "$HOME/.local/bin"
     "$HOME/bin"
@@ -260,6 +266,7 @@
 
   home.sessionVariables = {
     EDITOR = "nvim";
+    TERMINAL = "kitty";
   };
 
   fonts.fontconfig.enable = true;
