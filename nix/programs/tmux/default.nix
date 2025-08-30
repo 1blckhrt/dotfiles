@@ -44,6 +44,9 @@ in {
         plugin = tmuxWhichKey;
         extraConfig = ''
           set -g @tmux-which-key-xdg-enable 1
+          set -g @tmux2k-theme 'duo'
+          set -g @tmux2k-left-plugins "session"
+          set -g @tmux2k-right-plugins "network"
         '';
       }
       {
@@ -87,10 +90,6 @@ in {
       bind-key -n 'C-k' if-shell "$is_vim" 'send-keys C-k' 'select-pane -U'
       bind-key -n 'C-l' if-shell "$is_vim" 'send-keys C-l' 'select-pane -R'
 
-      set -g @tmux2k-theme 'duo'
-      set -g @tmux2k-left-plugins "session"
-      set -g @tmux2k-right-plugins "network"
-
       set -g @which-key-popup-time 0.01
 
       setw -g mode-keys vi
@@ -119,6 +118,7 @@ in {
     Service = {
       Type = "forking";
       ExecStart = "${pkgs.tmux}/bin/tmux new-session -d -s default";
+      ExecStartPost = "/home/blckhrt/.tmux/plugins/tmux-resurrect/scripts/restore.sh";
       RemainAfterExit = true;
       Restart = "on-failure";
     };
