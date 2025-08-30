@@ -99,9 +99,6 @@ in {
           # Workspace navigation
           "${mod}+Tab" = "workspace next";
           "${mod}+Shift+Tab" = "workspace prev";
-
-          # Dunst restart
-          "${mod}+Shift+d" = "--release exec killall dunst; exec notify-send 'restart dunst'";
         };
 
         window = {
@@ -247,7 +244,6 @@ in {
     xss-lock
     i3lock
     networkmanagerapplet
-    dunst
     libnotify
     libappindicator-gtk3
     libayatana-appindicator
@@ -304,7 +300,6 @@ in {
         type = "internal/i3";
         format = "<label-state> <label-mode>";
         foreground = "#FFFFFF";
-
         label-mode = "%mode%";
         label-focused = "  %name% ";
         label-unfocused = "  %name% ";

@@ -12,7 +12,6 @@
 
     settings = {
       window = {
-        title = "Alacritty Terminal";
         padding = {
           x = 10;
           y = 10;

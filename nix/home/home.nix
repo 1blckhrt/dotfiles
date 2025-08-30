@@ -29,6 +29,8 @@
     ../programs/starship/default.nix
     ../programs/ssh/default.nix
     ../programs/alacritty/default.nix
+    ../programs/rofi/default.nix
+    ../programs/dunst/default.nix
   ];
 
   home.packages = with pkgs; [
