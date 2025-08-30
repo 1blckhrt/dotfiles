@@ -19,14 +19,13 @@
         };
       };
 
-      shell = {program = "${pkgs.zsh}/bin/zsh";};
-
       colors.primary = {
         background = "#000000"; # black
         foreground = "#ffffff"; # white
       };
 
       font = {
+        size = 8.0;
         normal = {
           family = "JetBrainsMono Nerd Font";
           style = "Regular";

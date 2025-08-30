@@ -149,7 +149,7 @@ _: {
 
           require("copilot").setup({
          suggestion = { enabled = false },
-        panel = { enabled = true },
+        panel = { enabled = false },
        })
 
     '';

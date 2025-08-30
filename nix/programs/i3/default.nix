@@ -1,6 +1,9 @@
 {
   config,
   pkgs,
+  inputs,
+  lib,
+  nixGL,
   ...
 }: let
   mod = config.xsession.windowManager.i3.config.modifier;
@@ -20,7 +23,7 @@ in {
         };
 
         keybindings = {
-          "${mod}+Return" = "exec ${pkgs.alacritty}/bin/alacritty";
+          "${mod}+Return" = "exec --no-startup-id ${config.programs.alacritty.package}/bin/alacritty";
           "${mod}+q" = "kill";
           "${mod}+d" = "exec ${pkgs.rofi}/bin/rofi -show drun";
 
@@ -246,64 +249,68 @@ in {
     networkmanagerapplet
     dunst
     libnotify
-    polybar
     libappindicator-gtk3
     libayatana-appindicator
     xdg-desktop-portal
     xdg-desktop-portal-gtk
+    python313Packages.i3ipc
+    font-awesome
   ];
 
   services.polybar = {
     enable = true;
+    package = pkgs.polybar.override {
+      i3Support = true;
+    };
     script = "polybar -q -r main &";
     config = {
       "bar/main" = {
         monitor = "eDP-1";
         width = "100%";
         height = "30px";
-
+        scroll-up = "#i3.prev";
+        scroll-down = "#i3.next";
+        border-size = 4;
+        border-color = "#FFFFFF";
+        font-0 = "JetBrainsMono NF:size=12;1";
+        font-1 = "Font Awesome 6 Free Solid:size=12;1";
         background = "#000000";
         foreground = "#FFFFFF";
-        modules-left = "i3";
+        separator = " | ";
+        modules-left = "distro-icon i3 ";
         modules-center = "xwindow";
         modules-right = "date battery tray";
+      };
+
+      "module/distro-icon" = {
+        type = "custom/script";
+        exec = "echo 󰣭";
+        interval = 99999;
+        format = "<label>";
+        foreground = "#FFFFFF";
+        label = "%output%";
+        format-padding = 4;
       };
 
       "module/xwindow" = {
         type = "internal/xwindow";
         format = "<label>";
         foreground = "#FFFFFF";
-        format-padding = 1;
         label = "%title%";
+        label-maxlen = 70;
       };
 
       "module/i3" = {
         type = "internal/i3";
         format = "<label-state> <label-mode>";
-
-        ws-icon-0 = "1:1";
-        ws-icon-1 = "2:2";
-        ws-icon-2 = "3:3";
-        ws-icon-3 = "4:4";
-        ws-icon-4 = "5:5";
+        foreground = "#FFFFFF";
 
         label-mode = "%mode%";
-        label-mode-padding = 2;
-
-        label-unfocused = "%icon%";
-        label-unfocused-padding = 1;
-
-        label-focused = "%index% %icon%";
-        label-focused-font = 2;
-        label-focused-padding = 1;
-
-        label-visible = "%icon%";
-        label-visible-padding = 1;
-
-        label-urgent = "%index%";
-        label-urgent-padding = 1;
-
-        label-separator = "";
+        label-focused = "  %name% ";
+        label-unfocused = "  %name% ";
+        label-visible = "  %name% ";
+        label-urgent = "  %name% ";
+        format-padding = 4;
       };
 
       "module/date" = {
@@ -312,22 +319,24 @@ in {
         time = "%H:%M:%S";
         time-alt = "%Y-%m-%d%";
         format = "<label>";
+        label = " %time%";
         format-padding = 4;
-        label = "%time%";
       };
 
       "module/battery" = {
         type = "internal/battery";
         battery = "BAT0";
         full-at = 98;
-        label-charging = "⚡ %percentage%";
+        label-charging = " %percentage%";
         label-discharging = " %percentage%";
-        label-full = " %percentage%";
+        label-full = " %percentage%";
+        format-padding = 4;
       };
 
       "module/tray" = {
         type = "internal/tray";
         tray-foreground = "#FFFFFF";
+        format-padding = 4;
       };
     };
   };
