@@ -2,7 +2,6 @@
   config,
   pkgs,
   lib,
-  fetchFromGitHub,
   ...
 }: let
   tmux2k = pkgs.tmuxPlugins.mkTmuxPlugin {
@@ -29,6 +28,10 @@
     rtpFilePath = "plugin.sh.tmux";
   };
 in {
+  home.packages = [
+    pkgs.tmux
+  ];
+
   programs.tmux = {
     enable = true;
     baseIndex = 1;
@@ -36,76 +39,94 @@ in {
     terminal = "screen-256color";
 
     plugins = with pkgs.tmuxPlugins; [
+      {
+        plugin = resurrect;
+        extraConfig = ''
+          set -g @resurrect-strategy-nvim 'session'
+          set -g @resurrect-processes 'vim nvim hx cat less more tail watch'
+          resurrect_dir=~/.local/share/tmux/resurrect
+          set -g @resurrect-dir $resurrect_dir
+          set -g @resurrect-hook-post-save-all "sed -i 's| --cmd .*-vim-pack-dir||g; s|/etc/profiles/per-user/$USER/bin/||g; s|/nix/store/.*/bin/||g' $(readlink -f $resurrect_dir/last)"
+          set -g @resurrect-save 'S'
+          set -g @resurrect-restore 'R'
+          set -g @resurrect-save-bash-history 'on'
+          set -g @resurrect-save-zsh-history 'on'
+          set -g @resurrect-save-shell-history 'on'
+          set -g @resurrect-capture-pane-contents 'on'
+        '';
+      }
       sensible
-      continuum
-      resurrect
+      {
+        plugin = continuum;
+        extraConfig = ''
+          set -g @continuum-restore 'on'
+          set -g @continuum-save-interval '5'
+          set -g @continuum-save-bash-history 'on'
+          set -g @continuum-save-zsh-history 'on'
+          set -g @continuum-save-shell-history 'on'
+        '';
+      }
       tmux2k
       {
         plugin = tmuxWhichKey;
         extraConfig = ''
-          # enable XDG config
-          set -g @tmux-which-key-xdg-enable 1;
+          set -g @tmux-which-key-xdg-enable 1
         '';
       }
     ];
 
     extraConfig = ''
-         # Prefix
-         unbind C-b
-         bind C-x send-prefix
+      unbind C-b
+      bind C-x send-prefix
+      set -sg escape-time 0
+      set -g history-limit 1000000
 
-         # Escape time + history
-         set -sg escape-time 0
-         set -g history-limit 1000000
+      is_vim="ps -o state= -o comm= -t '#{pane_tty}' | grep -iqE '^[^TXZ ]+ +(\\S+\\/)?g?(view|n?vim?x?)(diff)?$'"
+      bind-key -n 'C-h' if-shell "$is_vim" 'send-keys C-h' 'select-pane -L'
+      bind-key -n 'C-j' if-shell "$is_vim" 'send-keys C-j' 'select-pane -D'
+      bind-key -n 'C-k' if-shell "$is_vim" 'send-keys C-k' 'select-pane -U'
+      bind-key -n 'C-l' if-shell "$is_vim" 'send-keys C-l' 'select-pane -R'
 
-         # Vim-aware pane navigation
-         is_vim="ps -o state= -o comm= -t '#{pane_tty}' | grep -iqE '^[^TXZ ]+ +(\\S+\\/)?g?(view|n?vim?x?)(diff)?$'"
-         bind-key -n 'C-h' if-shell "$is_vim" 'send-keys C-h' 'select-pane -L'
-         bind-key -n 'C-j' if-shell "$is_vim" 'send-keys C-j' 'select-pane -D'
-         bind-key -n 'C-k' if-shell "$is_vim" 'send-keys C-k' 'select-pane -U'
-         bind-key -n 'C-l' if-shell "$is_vim" 'send-keys C-l' 'select-pane -R'
+      set -g @tmux2k-theme 'duo'
+      set -g @tmux2k-left-plugins "session"
+      set -g @tmux2k-right-plugins "battery time"
 
-         # tmux2k config
-         set -g @tmux2k-theme 'duo'
-      set -g @tmux2k-icons-only true
-         set -g @tmux2k-left-plugins "session"
-         set -g @tmux2k-right-plugins "battery time"
+      set -g @which-key-popup-time 0.01
 
-         # which-key config
-         set -g @which-key-popup-time 0.01
-         bind-key Space run-shell "${tmuxWhichKey}/which-key.sh"
+      setw -g mode-keys vi
+      bind d detach
+      bind * list-clients
+      bind | split-window -h -c "#{pane_current_path}"
+      bind - split-window -v -c "#{pane_current_path}"
+      bind h select-pane -L
+      bind j select-pane -D
+      bind k select-pane -U
+      bind l select-pane -R
 
-         # General settings
-         setw -g mode-keys vi
-         bind d detach
-         bind * list-clients
-         bind | split-window -h -c "#{pane_current_path}"
-         bind - split-window -v -c "#{pane_current_path}"
-         bind h select-pane -L
-         bind j select-pane -D
-         bind k select-pane -U
-         bind l select-pane -R
-
-         # Status bar
-         set-option -g status-position top
-
-         # Continuum
-         set -g @continuum-restore 'on'
-         set -g @continuum-save-interval '1'
-         set -g @continuum-boot 'on'
-
-         # Resurrect
-         set -g @resurrect-save 'S'
-         set -g @resurrect-restore 'R'
-         set -g @resurrect-save-bash-history 'on'
-         set -g @resurrect-save-zsh-history 'on'
-         set -g @resurrect-save-shell-history 'on'
-         set -g @resurrect-strategy-nvim 'session'
-         set -g @resurrect-capture-pane-contents 'on'
+      set-option -g status-position top
     '';
   };
 
-  xdg.configFile."tmux/plugins/tmux-which-key/config.yaml".text = lib.generators.toYAML {} {
-    command_alias_start_index = 200;
+  # Fixed systemd service for tmux with resurrection support
+  systemd.user.services.tmux = {
+    Unit = {
+      Description = "Tmux default session";
+      Documentation = "man:tmux(1)";
+      After = ["graphical-session.target"];
+      Requires = ["graphical-session.target"];
+    };
+
+    Service = {
+      Type = "forking";
+      ExecStart = "${pkgs.tmux}/bin/tmux new-session -d -s default";
+      ExecStop = "${pkgs.tmux}/bin/tmux kill-server";
+      Environment = "PATH=${lib.makeBinPath [pkgs.tmux pkgs.coreutils]}";
+      RemainAfterExit = true;
+      Restart = "on-failure";
+    };
+
+    Install = {
+      WantedBy = ["default.target"];
+    };
   };
 }
