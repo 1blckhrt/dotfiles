@@ -70,7 +70,7 @@ in {
         plugin = continuum;
         extraConfig = ''
           set -g @continuum-restore 'on'
-          set -g @continuum-save-interval '1'
+          set -g @continuum-save-interval '0.5'
           set -g @continuum-save-bash-history 'on'
           set -g @continuum-save-zsh-history 'on'
           set -g @continuum-save-shell-history 'on'
@@ -117,8 +117,7 @@ in {
 
     Service = {
       Type = "forking";
-      ExecStart = "${pkgs.tmux}/bin/tmux new-session -d -s default";
-      ExecStartPost = "/home/blckhrt/.tmux/plugins/tmux-resurrect/scripts/restore.sh";
+      ExecStart = "${pkgs.tmux}/bin/tmux new-session -d -s default && /home/blckhrt/.tmux/plugins/tmux-resurrect/scripts/restore.sh";
       RemainAfterExit = true;
       Restart = "on-failure";
     };
