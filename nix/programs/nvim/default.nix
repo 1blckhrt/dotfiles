@@ -121,7 +121,6 @@
       indent-blankline.enable = true;
       nvim-autopairs.enable = true;
       barbecue.enable = true;
-      neocord.enable = true;
       noice.enable = true;
       tmux-navigator.enable = true;
 
