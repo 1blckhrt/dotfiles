@@ -67,7 +67,7 @@ system:
 
 update: update-dotfiles home system
 
-all: nix home system
+all: nix update
 	@echo "✅ All setup done. Please reboot your system if necessary."
 
 
