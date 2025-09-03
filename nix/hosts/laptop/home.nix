@@ -26,7 +26,8 @@
     ../../programs/atuin/default.nix
     ../../programs/bin/default.nix
     ../../programs/git/default.nix
-    ../../programs/i3/default.nix
+    ../../programs/hyprland/default.nix
+    #../../programs/i3/default.nix
     ../../programs/misc/default.nix
     ../../programs/nvim/default.nix
     ../../programs/ssh/default.nix
