@@ -28,12 +28,12 @@
     xwayland.enable = true;
     settings = {
       exec = [
+        "systemctl --user restart waybar.service"
         "systemctl --user restart hyprpaper.service"
         "systemctl --user restart xdg-desktop-portal.service"
         "systemctl --user restart swaync.service"
         "systemctl --user restart snixembed.service"
         "systemctl --user restart trayscale.service"
-        "systemctl --user restart snixembed.service"
         "nm-applet --indicator"
       ];
 
