@@ -32,6 +32,7 @@
     ../programs/ssh/default.nix
     ../programs/starship/default.nix
     ../programs/tmux/default.nix
+    ../programs/zoxide/default.nix
     ../programs/zsh/default.nix
   ];
 

@@ -189,16 +189,12 @@ in {
             always = true;
             notification = true;
           }
-          {
-            command = "autotiling";
-            always = true;
-            notification = false;
-          }
         ];
       };
 
       extraConfig = ''
         tiling_drag modifier titlebar
+        exec_always --no-startup-id ${pkgs.autotiling}/bin/autotiling
       '';
     };
   };
