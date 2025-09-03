@@ -23,7 +23,7 @@ in {
         };
 
         keybindings = {
-          "${mod}+Return" = "exec --no-startup-id ${config.programs.alacritty.package}/bin/alacritty";
+          "${mod}+Return" = "exec --no-startup-id ${pkgs.alacritty}/bin/alacritty";
           "${mod}+q" = "kill";
           "${mod}+d" = "exec ${pkgs.rofi}/bin/rofi -show drun";
 
@@ -175,7 +175,7 @@ in {
             notification = false;
           }
           {
-            command = "systemctl --user restart polybar";
+            command = "systemctl --user restart polybar.service";
             always = true;
             notification = false;
           }
@@ -185,7 +185,17 @@ in {
             notification = false;
           }
           {
-            command = "systemctl --user restart dunst";
+            command = "systemctl --user restart dunst.service";
+            always = true;
+            notification = true;
+          }
+          {
+            command = "systemctl --user restart trayscale.service";
+            always = true;
+            notification = true;
+          }
+          {
+            command = "systemctl --user restart snixembed.service";
             always = true;
             notification = true;
           }

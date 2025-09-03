@@ -1,5 +1,5 @@
 {
-  description = "Home Manager configuration";
+  description = "Home Manager + System Manager configuration";
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-25.05";
@@ -33,30 +33,26 @@
     system-manager,
     nix-system-graphics,
     ...
-  } @ inputs: {
-    systemConfigs.default = system-manager.lib.makeSystemConfig {
-      modules = [
-        nix-system-graphics.systemModules.default
-        {
-          config = {
-            nixpkgs.hostPlatform = "x86_64-linux";
-            system-manager.allowAnyDistro = true;
-            system-graphics = {
-              enable = true;
-              enable32Bit = true;
-            };
-          };
-        }
-      ];
+  }: {
+    systemConfigs = {
+      laptop = system-manager.lib.makeSystemConfig {
+        modules = [
+          ./hosts/laptop/system.nix
+          nix-system-graphics.systemModules.default
+        ];
+      };
     };
+
     homeConfigurations = {
       "blckhrt@laptop" = home-manager.lib.homeManagerConfiguration {
         pkgs = nixpkgs.legacyPackages.x86_64-linux;
-        extraSpecialArgs = {
-          inherit inputs;
-        };
+       extraSpecialArgs = {
+  inputs = {
+    inherit self nixpkgs home-manager system-manager nixvim nix-system-graphics;
+  };
+};
         modules = [
-          ./hosts/laptop.nix
+          ./hosts/laptop/home.nix
           {home.packages = [system-manager.packages.x86_64-linux.default];}
         ];
       };

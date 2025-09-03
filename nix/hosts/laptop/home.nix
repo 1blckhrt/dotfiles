@@ -22,18 +22,21 @@
 
   imports = [
     inputs.nixvim.homeManagerModules.nixvim
-    ../programs/alacritty/default.nix
-    ../programs/atuin/default.nix
-    ../programs/bin/default.nix
-    ../programs/git/default.nix
-    ../programs/i3/default.nix
-    ../programs/misc/default.nix
-    ../programs/nvim/default.nix
-    ../programs/ssh/default.nix
-    ../programs/starship/default.nix
-    ../programs/tmux/default.nix
-    ../programs/zoxide/default.nix
-    ../programs/zsh/default.nix
+    ../../programs/alacritty/default.nix
+    ../../programs/atuin/default.nix
+    ../../programs/bin/default.nix
+    ../../programs/git/default.nix
+    ../../programs/i3/default.nix
+    ../../programs/misc/default.nix
+    ../../programs/nvim/default.nix
+    ../../programs/ssh/default.nix
+    ../../programs/starship/default.nix
+    ../../programs/tmux/default.nix
+    ../../programs/zoxide/default.nix
+    ../../programs/zsh/default.nix
+
+    ./services/syncthing/default.nix
+    ./services/trayscale/default.nix
   ];
 
   xdg.configFile."environment.d/envvars.conf".text = ''
@@ -43,6 +46,7 @@
   home.sessionPath = [
     "$HOME/.local/bin"
     "$HOME/bin"
+    "/run/system-manager/sw/bin/"
   ];
 
   home.sessionVariables = {

@@ -11,7 +11,8 @@
     autosuggestion.enable = true;
     syntaxHighlighting.enable = true;
     shellAliases = {
-      oo = "cd $HOME/Documents/Notes/";
+      ls = "lsd";
+      notes = "cd $HOME/Documents/Notes/ & tmux-session notes";
       h = "history";
       ff = "fastfetch";
       c = "clear";
@@ -26,43 +27,48 @@
       "...." = "cd ../../..";
     };
     initContent = ''
-            bindkey -s '^f' "$HOME/bin/tmux-sessionizer\n"
-      export PATH=/home/blckhrt/.opencode/bin:$PATH
-        export PATH="$HOME/.cargo/bin:$PATH"
+      		# Load system-manager PATH
+      if [ -f /etc/profile.d/system-manager-path.sh ]; then
+          source /etc/profile.d/system-manager-path.sh
+      fi
 
-            # fnm
-            FNM_PATH="$HOME/.local/share/fnm"
-            if [ -d "$FNM_PATH" ]; then
-              export PATH="$FNM_PATH:$PATH"
-              eval "$(fnm env)"
-            fi
+                  bindkey -s '^f' "$HOME/bin/tmux-sessionizer\n"
+            export PATH=/home/blckhrt/.opencode/bin:$PATH
+              export PATH="$HOME/.cargo/bin:$PATH"
 
-            export TERM=xterm-256color
-            eval "$(direnv hook zsh)"
+                  # fnm
+                  FNM_PATH="$HOME/.local/share/fnm"
+                  if [ -d "$FNM_PATH" ]; then
+                    export PATH="$FNM_PATH:$PATH"
+                    eval "$(fnm env)"
+                  fi
 
-            gpush() {
-              git add .
-              git status
-              echo -n "Continue with commit and push? [y/N]: "
-              read -r reply
-              if [[ "$reply" != "y" && "$reply" != "Y" ]]; then
-                echo "Aborted."
-                return 1
-              fi
-              echo -n "Enter commit message: "
-              read -r message
-              git commit -am "$message"
-              git push
-            }
+                  export TERM=xterm-256color
+                  eval "$(direnv hook zsh)"
 
-            tmux-session() {
-              if [ -z "$1" ]; then
-              echo "Usage: tmux-session <session-name>"
-                return 1
-              fi
-              tmux new-session -d -s "$1"
-              tmux attach -t "$1"
-            }
+                  gpush() {
+                    git add .
+                    git status
+                    echo -n "Continue with commit and push? [y/N]: "
+                    read -r reply
+                    if [[ "$reply" != "y" && "$reply" != "Y" ]]; then
+                      echo "Aborted."
+                      return 1
+                    fi
+                    echo -n "Enter commit message: "
+                    read -r message
+                    git commit -am "$message"
+                    git push
+                  }
+
+                  tmux-session() {
+                    if [ -z "$1" ]; then
+                    echo "Usage: tmux-session <session-name>"
+                      return 1
+                    fi
+                    tmux new-session -d -s "$1"
+                    tmux attach -t "$1"
+                  }
     '';
   };
 }

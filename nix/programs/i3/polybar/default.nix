@@ -5,6 +5,11 @@
   lib,
   ...
 }: {
+  # snixembed bridge for trayscale support
+  services.snixembed = {
+    enable = true;
+    beforeUnits = ["polybar.service" "trayscale.service"];
+  };
   services.polybar = {
     enable = true;
     package = pkgs.polybar.override {
@@ -49,7 +54,7 @@
         separator = " | ";
         modules-left = "distro-icon i3 ";
         modules-center = "xwindow";
-        modules-right = "date battery tray";
+        modules-right = "date battery";
       };
 
       "module/distro-icon" = {
@@ -104,7 +109,8 @@
 
       "module/tray" = {
         type = "internal/tray";
-        tray-foreground = "#FFFFFF";
+        tray-foreground = "#000000";
+        tray-background = "#FFFFFF";
         format-padding = 4;
       };
     };

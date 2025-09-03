@@ -5,6 +5,7 @@ HM_SRC := $(DOT_DIR)/nix
 HM_DEST := $(HOME)/.config/home-manager
 REPO_URL := https://github.com/1blckhrt/dotfiles.git
 FLAKE_REF := $(shell whoami)@$(shell hostname)
+HOST := $(shell hostname)
 NIX_PROFILE := $(HOME)/.nix-profile
 
 .PHONY: nix update-dotfiles home system update all
@@ -59,10 +60,16 @@ system:
 	if grep -q '^ID=nixos' /etc/os-release; then \
 		echo "⚠️  Non-system-manager setup skipped: detected NixOS."; \
 	else \
-		sudo env "PATH=$$HOME/.nix-profile/bin:$$PATH" nix run 'github:numtide/system-manager' -- switch --flake .; \
+		sudo env "PATH=$$HOME/.nix-profile/bin:$$PATH" \
+		nix run --extra-experimental-features 'flakes nix-command' 'github:numtide/system-manager' \
+			-- switch \
+			--flake .#$(HOST) \
+			; \
 		echo "› System configuration applied. A reboot may be required."; \
 	fi
 	@echo "✅ System setup done."
+
+
 
 
 update: update-dotfiles home system
