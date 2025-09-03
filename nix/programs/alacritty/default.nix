@@ -3,12 +3,10 @@
   pkgs,
   inputs,
   lib,
-  nixGL,
   ...
 }: {
   programs.alacritty = {
     enable = true;
-    package = config.lib.nixGL.wrap pkgs.alacritty;
 
     settings = {
       window = {
@@ -24,7 +22,7 @@
       };
 
       font = {
-        size = 8.0;
+        size = 10.0;
         normal = {
           family = "JetBrainsMono Nerd Font";
           style = "Regular";

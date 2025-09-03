@@ -123,6 +123,7 @@
       barbecue.enable = true;
       noice.enable = true;
       tmux-navigator.enable = true;
+      rustaceanvim.enable = true;
 
       obsidian = {
         enable = true;

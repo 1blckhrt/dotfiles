@@ -3,11 +3,11 @@
   pkgs,
   inputs,
   lib,
-  nixGL,
   ...
 }: let
   mod = config.xsession.windowManager.i3.config.modifier;
 in {
+  imports = [./dunst/default.nix ./rofi/default.nix ./picom/default.nix ./polybar/default.nix ./packages.nix ./monitors.nix];
   xsession = {
     enable = true;
     windowManager.i3 = {
@@ -165,11 +165,6 @@ in {
             notification = false;
           }
           {
-            command = "~/.config/i3/scripts/restart-picom.sh";
-            always = true;
-            notification = false;
-          }
-          {
             command = "xss-lock --transfer-sleep-lock -- i3lock --nofork";
             always = true;
             notification = false;
@@ -180,27 +175,22 @@ in {
             notification = false;
           }
           {
+            command = "systemctl --user restart polybar";
+            always = true;
+            notification = false;
+          }
+          {
             command = "systemctl --user restart xdg-desktop-portal.service";
             always = true;
             notification = false;
           }
           {
-            command = "systemctl --user restart polybar.service";
-            always = true;
-            notification = false;
-          }
-          {
-            command = "dunst";
+            command = "systemctl --user restart dunst";
             always = true;
             notification = true;
           }
           {
-            command = "~/.config/i3/scripts/autotile.py";
-            always = true;
-            notification = false;
-          }
-          {
-            command = "~/.config/i3/scripts/monitors.sh";
+            command = "autotiling";
             always = true;
             notification = false;
           }
@@ -211,136 +201,5 @@ in {
         tiling_drag modifier titlebar
       '';
     };
-  };
-
-  services.picom = {
-    enable = true;
-    backend = "xrender";
-    vSync = true;
-    shadow = true;
-    fade = true;
-    fadeSteps = [0.03 0.03];
-    inactiveOpacity = 0.9;
-    activeOpacity = 1.0;
-    wintypes = {
-      tooltip = {
-        fade = true;
-        shadow = true;
-        opacity = 0.85;
-        focus = true;
-      };
-      dock = {shadow = false;};
-      dnd = {shadow = false;};
-      popup_menu = {opacity = 0.9;};
-      dropdown_menu = {opacity = 0.9;};
-    };
-  };
-
-  home.packages = with pkgs; [
-    rofi
-    pulseaudio
-    flameshot
-    dex
-    xss-lock
-    i3lock
-    networkmanagerapplet
-    libnotify
-    libappindicator-gtk3
-    libayatana-appindicator
-    xdg-desktop-portal
-    xdg-desktop-portal-gtk
-    python313Packages.i3ipc
-    font-awesome
-  ];
-
-  services.polybar = {
-    enable = true;
-    package = pkgs.polybar.override {
-      i3Support = true;
-    };
-    script = "polybar -q -r main &";
-    config = {
-      "bar/main" = {
-        monitor = "eDP-1";
-        width = "100%";
-        height = "30px";
-        scroll-up = "#i3.prev";
-        scroll-down = "#i3.next";
-        border-size = 4;
-        border-color = "#FFFFFF";
-        font-0 = "JetBrainsMono NF:size=12;1";
-        font-1 = "Font Awesome 6 Free Solid:size=12;1";
-        background = "#000000";
-        foreground = "#FFFFFF";
-        separator = " | ";
-        modules-left = "distro-icon i3 ";
-        modules-center = "xwindow";
-        modules-right = "date battery tray";
-      };
-
-      "module/distro-icon" = {
-        type = "custom/script";
-        exec = "echo 󰣭";
-        interval = 99999;
-        format = "<label>";
-        foreground = "#FFFFFF";
-        label = "%output%";
-        format-padding = 4;
-      };
-
-      "module/xwindow" = {
-        type = "internal/xwindow";
-        format = "<label>";
-        foreground = "#FFFFFF";
-        label = "%title%";
-        label-maxlen = 70;
-      };
-
-      "module/i3" = {
-        type = "internal/i3";
-        format = "<label-state> <label-mode>";
-        foreground = "#FFFFFF";
-        label-mode = "%mode%";
-        label-focused = "  %name% ";
-        label-unfocused = "  %name% ";
-        label-visible = "  %name% ";
-        label-urgent = "  %name% ";
-        format-padding = 4;
-      };
-
-      "module/date" = {
-        type = "internal/date";
-        interval = "1.0";
-        time = "%H:%M:%S";
-        time-alt = "%Y-%m-%d%";
-        format = "<label>";
-        label = " %time%";
-        format-padding = 4;
-      };
-
-      "module/battery" = {
-        type = "internal/battery";
-        battery = "BAT0";
-        full-at = 98;
-        label-charging = " %percentage%";
-        label-discharging = " %percentage%";
-        label-full = " %percentage%";
-        format-padding = 4;
-      };
-
-      "module/tray" = {
-        type = "internal/tray";
-        tray-foreground = "#FFFFFF";
-        format-padding = 4;
-      };
-    };
-  };
-
-  home.file.".config/i3/scripts/autotile.py".source = ./scripts/autotile.py;
-  home.file.".config/i3/scripts/monitors.sh".source = ./scripts/monitors.sh;
-  home.file.".config/i3/scripts" = {
-    source = ./scripts;
-    recursive = true;
-    executable = true;
   };
 }
