@@ -13,6 +13,10 @@
   };
   home.packages = with pkgs; [
     wofi
+    brightnessctl
+    grim
+    wl-clipboard
+    slurp
   ];
 
   services.swaync.enable = true;
@@ -22,6 +26,24 @@
     enable = true;
     systemd.enable = true;
   };
+
+  home.file.".config/hypr/scripts/screenshot.sh".text = ''
+    #!/usr/bin/env bash
+
+    mkdir -p "$HOME/Pictures/Screenshots"
+
+    REGION=$(slurp) || exit 1
+
+    FILE="$HOME/Pictures/Screenshots/Screenshot-$(date +%F_%T).png"
+
+    grim -g "$REGION" "$FILE" || exit 1
+
+    wl-copy < "$FILE"
+
+    notify-send "Screenshot saved and copied!"
+  '';
+
+  home.file.".config/hypr/scripts/screenshot.sh".executable = true;
 
   wayland.windowManager.hyprland = {
     enable = true;
@@ -156,6 +178,7 @@
       "$mainMod" = "SUPER";
 
       bind = [
+        ", Print, exec, ~/.config/hypr/scripts/screenshot.sh"
         "$mainMod, Return, exec, $terminal"
         "$mainMod, Q, killactive,"
         "$mainMod, M, exit,"

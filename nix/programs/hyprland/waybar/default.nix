@@ -29,21 +29,26 @@ in {
     snixembed
     libappindicator-gtk3
   ];
+
   services.snixembed.enable = true;
+
   programs.waybar.settings = with custom; [
     {
       position = "top";
       layer = "top";
       height = 42;
-      margin-top = 0;
+      margin-top = 5;
       margin-bottom = 0;
       margin-left = 0;
       margin-right = 0;
+
       modules-left = [
         "custom/linuxmint"
         "hyprland/workspaces"
       ];
+
       modules-center = ["hyprland/window"];
+
       modules-right = [
         "pulseaudio"
         "network"
@@ -66,6 +71,13 @@ in {
           active = "";
           default = "";
         };
+      };
+
+      "hyprland/window" = {
+        format = "{}";
+        max-length = 60; # optional: truncate very long titles
+        tooltip = false;
+        expand = true; # <--- makes it stretch to center properly
       };
 
       "pulseaudio" = {
@@ -120,33 +132,30 @@ in {
       transition: background-color 0.3s ease-out;
     }
 
+    /* Fully transparent bar */
     window#waybar {
-      background: rgba(0,0,0,0.95);
-      color: ${custom.text_color};
-      font-family: "JetBrainsMono Nerd Font", monospace;
-      transition: background-color 0.5s;
+      background: transparent;
     }
 
-    .modules-center,
-    .modules-left,
-    .modules-right {
-      background: rgba(0,0,0,0.85);
-      margin: 5px 10px;
-      padding: 0 5px;
-      border-radius: 15px;
-    }
-
+    #custom-linuxmint,
+    #workspaces,
+    #window,
     #clock,
     #battery,
-    #cpu,
-    #memory,
-    #temperature,
     #network,
     #pulseaudio,
-    #tray
-    {
-      padding: 0 10px;
-      border-radius: 15px;
+    #tray {
+      background: #000000;        /* Black bubble */
+      color: #ffffff;             /* White text */
+      border: 1px solid #ffffff;  /* White border */
+      border-radius: 12px;
+      padding: 4px 12px;          /* Space inside bubble */
+      margin: 0 4px;              /* Space between bubbles */
+    }
+
+    /* Optional: tweak window bubble so long titles don't touch border */
+    #window {
+      padding: 4px 20px;
     }
   '';
 }
