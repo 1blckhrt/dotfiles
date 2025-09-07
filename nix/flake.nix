@@ -46,14 +46,26 @@
     homeConfigurations = {
       "blckhrt@laptop" = home-manager.lib.homeManagerConfiguration {
         pkgs = nixpkgs.legacyPackages.x86_64-linux;
-       extraSpecialArgs = {
-  inputs = {
-    inherit self nixpkgs home-manager system-manager nixvim nix-system-graphics;
-  };
-};
+        extraSpecialArgs = {
+          inputs = {
+            inherit self nixpkgs home-manager system-manager nixvim nix-system-graphics;
+          };
+        };
         modules = [
           ./hosts/laptop/home.nix
           {home.packages = [system-manager.packages.x86_64-linux.default];}
+        ];
+      };
+
+      "blckhrt@pc" = home-manager.lib.homeManagerConfiguration {
+        pkgs = nixpkgs.legacyPackages.x86_64-linux;
+        extraSpecialArgs = {
+          inputs = {
+            inherit self nixpkgs home-manager nixvim;
+          };
+        };
+        modules = [
+          ./hosts/pc-mint/home.nix
         ];
       };
     };

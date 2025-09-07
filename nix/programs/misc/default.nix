@@ -27,13 +27,5 @@
     wallust
   ];
 
-  home.file.".xinitrc" = {
-    text = ''
-      export DISPLAY=:0
-      exec i3
-    '';
-    executable = true;
-  };
-
   fonts.fontconfig.enable = true;
 }
