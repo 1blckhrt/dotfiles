@@ -30,7 +30,11 @@ in {
     libappindicator-gtk3
   ];
 
-  services.snixembed.enable = true;
+  programs.waybar.systemd.enable = true;
+
+  systemd.user.services.snixembed.Unit = {
+    After = ["graphical-session.target" "dbus.service"];
+  };
 
   programs.waybar.settings = with custom; [
     {

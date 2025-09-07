@@ -6,11 +6,6 @@
   ...
 }: {
   imports = [./hyprpaper/default.nix ./waybar/default.nix];
-  # snixembed bridge for trayscale support
-  services.snixembed = {
-    enable = true;
-    beforeUnits = ["waybar.service" "trayscale.service"];
-  };
   home.packages = with pkgs; [
     wofi
     brightnessctl
@@ -54,7 +49,6 @@
         "systemctl --user restart hyprpaper.service"
         "systemctl --user restart xdg-desktop-portal.service"
         "systemctl --user restart swaync.service"
-        "systemctl --user restart snixembed.service"
         "systemctl --user restart trayscale.service"
         "nm-applet --indicator"
       ];
