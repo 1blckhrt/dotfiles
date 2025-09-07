@@ -189,14 +189,16 @@
         desc = "Previous buffer";
       };
     }
+
+    # markdown preview
     {
-      mode = ["n"];
-      key = "<leader>be";
-      action = ":enew<CR>";
+      "mode" = ["n"];
+      key = "<leader>md";
+      action = ":MarkdownPreviewToggle<CR>";
       options = {
         noremap = true;
         silent = true;
-        desc = "New empty buffer";
+        desc = "Toggle markdown preview";
       };
     }
   ];

@@ -26,9 +26,8 @@
       tmux-navigator.enable = true;
       rustaceanvim.enable = true;
       todo-comments.enable = true;
-      smart-splits = {
-        enable = true;
-      };
+      smart-splits.enable = true;
+      markdown-preview.enable = true;
     };
   };
 }
