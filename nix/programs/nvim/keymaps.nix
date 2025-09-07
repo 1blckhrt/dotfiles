@@ -147,6 +147,26 @@
         desc = "Resize right";
       };
     }
+    {
+      mode = ["n"];
+      key = "<A-j>";
+      action = "<cmd>lua require('smart-splits').resize_down()<CR>";
+      options = {
+        noremap = true;
+        silent = true;
+        desc = "Resize down";
+      };
+    }
+    {
+      mode = ["n"];
+      key = "<A-h>";
+      action = "<cmd>lua require('smart-splits').resize_left()<CR>";
+      options = {
+        noremap = true;
+        silent = true;
+        desc = "Resize right";
+      };
+    }
 
     # Buffer management
     {

@@ -8,16 +8,13 @@
   programs.nixvim.plugins = {
     obsidian = {
       enable = true;
-      lazyLoad = {
-        settings = {
-          ft = "markdown";
-          workspaces = [
-            {
-              name = "main";
-              path = "~/Documents/Notes/";
-            }
-          ];
-        };
+      settings = {
+        workspaces = [
+          {
+            name = "main";
+            path = "~/Documents/Notes/";
+          }
+        ];
       };
     };
   };

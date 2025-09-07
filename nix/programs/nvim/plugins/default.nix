@@ -16,10 +16,7 @@
       web-devicons.enable = true;
       nvim-tree.enable = true;
       which-key.enable = true;
-      render-markdown = {
-        enable = true;
-        lazyLoad.settings.ft = "markdown";
-      };
+      render-markdown.enable = true;
       tiny-inline-diagnostic.enable = true;
       hop.enable = true;
       indent-blankline.enable = true;
@@ -27,10 +24,7 @@
       barbecue.enable = true;
       noice.enable = true;
       tmux-navigator.enable = true;
-      rustaceanvim = {
-        enable = true;
-        lazyLoad.settings.ft = "rust";
-      };
+      rustaceanvim.enable = true;
       todo-comments.enable = true;
       smart-splits = {
         enable = true;
