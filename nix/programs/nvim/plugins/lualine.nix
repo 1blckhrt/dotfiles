@@ -36,8 +36,8 @@ _: {
           "fileformat"
           "filetype"
         ];
-        lualine_y = ["progress"];
-        lualine_z = ["location"];
+        lualine_y = ["lsp_status"];
+        lualine_z = ["hostname"];
       };
     };
   };

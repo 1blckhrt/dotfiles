@@ -20,7 +20,7 @@
           versioning = {
             type = "simple";
           };
-          type = "sendreceive";
+          type = "sendonly";
         };
 
         "ebooks" = {

@@ -1,0 +1,40 @@
+{
+  config,
+  pkgs,
+  inputs,
+  lib,
+  ...
+}: {
+  imports = [./cmp.nix ./lsp.nix ./lualine.nix ./telescope.nix ./obsidian.nix ./treesitter.nix];
+  programs.nixvim = {
+    extraPlugins = [
+      pkgs.vimPlugins.lackluster-nvim
+    ];
+
+    plugins = {
+      bufferline.enable = true;
+      web-devicons.enable = true;
+      nvim-tree.enable = true;
+      which-key.enable = true;
+      render-markdown = {
+        enable = true;
+        lazyLoad.settings.ft = "markdown";
+      };
+      tiny-inline-diagnostic.enable = true;
+      hop.enable = true;
+      indent-blankline.enable = true;
+      nvim-autopairs.enable = true;
+      barbecue.enable = true;
+      noice.enable = true;
+      tmux-navigator.enable = true;
+      rustaceanvim = {
+        enable = true;
+        lazyLoad.settings.ft = "rust";
+      };
+      todo-comments.enable = true;
+      smart-splits = {
+        enable = true;
+      };
+    };
+  };
+}
