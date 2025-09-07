@@ -6,6 +6,18 @@
   ...
 }: {
   programs.nixvim.keymaps = [
+    # transparency
+    {
+      mode = ["n"];
+      key = "<leader>t";
+      action = ":TransparentToggle<CR>";
+      options = {
+        noremap = true;
+        silent = true;
+        desc = "Toggle transparency";
+      };
+    }
+
     # easy cmds
     {
       mode = ["n"];

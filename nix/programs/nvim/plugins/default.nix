@@ -28,6 +28,10 @@
       todo-comments.enable = true;
       smart-splits.enable = true;
       markdown-preview.enable = true;
+      transparent = {
+        enable = true;
+        autoLoad = true;
+      };
     };
   };
 }

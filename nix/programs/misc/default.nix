@@ -24,6 +24,7 @@
     direnv
     zip
     unzip
+    wallust
   ];
 
   home.file.".xinitrc" = {

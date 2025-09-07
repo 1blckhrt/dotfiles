@@ -69,6 +69,9 @@
                     tmux new-session -d -s "$1"
                     tmux attach -t "$1"
                   }
+
+      			wallust theme Mono-White
+      			clear
     '';
   };
 }
