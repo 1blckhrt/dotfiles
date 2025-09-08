@@ -26,6 +26,7 @@
     ../../programs/atuin/default.nix
     ../../programs/bin/default.nix
     ../../programs/git/default.nix
+    ../../programs/hyprland/default.nix
     ../../programs/misc/default.nix
     ../../programs/nvim/default.nix
     ../../programs/ssh/default.nix
@@ -33,6 +34,8 @@
     ../../programs/tmux/default.nix
     ../../programs/zoxide/default.nix
     ../../programs/zsh/default.nix
+
+    ./services/trayscale/default.nix
   ];
 
   xdg.configFile."environment.d/envvars.conf".text = ''

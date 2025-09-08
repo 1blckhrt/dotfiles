@@ -41,6 +41,13 @@
           nix-system-graphics.systemModules.default
         ];
       };
+
+      pc = system-manager.lib.makeSystemConfig {
+        modules = [
+          ./hosts/pc-mint/system.nix
+          nix-system-graphics.systemModules.default
+        ];
+      };
     };
 
     homeConfigurations = {
@@ -61,11 +68,12 @@
         pkgs = nixpkgs.legacyPackages.x86_64-linux;
         extraSpecialArgs = {
           inputs = {
-            inherit self nixpkgs home-manager nixvim;
+            inherit self nixpkgs home-manager system-manager nixvim nix-system-graphics;
           };
         };
         modules = [
           ./hosts/pc-mint/home.nix
+          {home.packages = [system-manager.packages.x86_64-linux.default];}
         ];
       };
     };
