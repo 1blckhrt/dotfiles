@@ -25,6 +25,7 @@
     zip
     unzip
     wallust
+    font-awesome
   ];
 
   fonts.fontconfig.enable = true;

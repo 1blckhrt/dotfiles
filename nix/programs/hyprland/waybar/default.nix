@@ -88,11 +88,10 @@ in {
         format = "{icon} {volume}%";
         format-muted = " {volume}%";
         format-icons = {
-          default = [""];
+          default = [""];
         };
         scroll-step = 2;
-        on-click = "pamixer -t";
-        on-click-right = "pavucontrol";
+        on-click = "pavucontrol";
       };
 
       "network" = {
@@ -129,37 +128,38 @@ in {
   ];
 
   programs.waybar.style = ''
-    * {
-      font-family: "JetBrainsMono Nerd Font", monospace;
+      * {
+      font-family: "JetBrainsMono Nerd Font", "Font Awesome 6 Free", "Font Awesome 6 Brands", monospace;
       font-size: ${custom.font_size};
       color: ${custom.text_color};
       transition: background-color 0.3s ease-out;
     }
 
-    /* Fully transparent bar */
-    window#waybar {
-      background: transparent;
-    }
 
-    #custom-linuxmint,
-    #workspaces,
-    #window,
-    #clock,
-    #battery,
-    #network,
-    #pulseaudio,
-    #tray {
-      background: #000000;        /* Black bubble */
-      color: #ffffff;             /* White text */
-      border: 1px solid #ffffff;  /* White border */
-      border-radius: 12px;
-      padding: 4px 12px;          /* Space inside bubble */
-      margin: 0 4px;              /* Space between bubbles */
-    }
+        /* Fully transparent bar */
+        window#waybar {
+          background: transparent;
+        }
 
-    /* Optional: tweak window bubble so long titles don't touch border */
-    #window {
-      padding: 4px 20px;
-    }
+        #custom-linuxmint,
+        #workspaces,
+        #window,
+        #clock,
+        #battery,
+        #network,
+        #pulseaudio,
+        #tray {
+          background: #000000;        /* Black bubble */
+          color: #ffffff;             /* White text */
+          border: 1px solid #ffffff;  /* White border */
+          border-radius: 12px;
+          padding: 4px 12px;          /* Space inside bubble */
+          margin: 0 4px;              /* Space between bubbles */
+        }
+
+        /* Optional: tweak window bubble so long titles don't touch border */
+        #window {
+          padding: 4px 20px;
+        }
   '';
 }

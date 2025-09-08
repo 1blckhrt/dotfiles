@@ -5,5 +5,5 @@
   lib,
   ...
 }: {
-  imports = [./tmux-sessionizer.nix ./notes/default.nix];
+  imports = [./tmux-sessionizer.nix ./notes/default.nix ./cheat-sheet.nix];
 }
