@@ -18,6 +18,18 @@
       };
     }
 
+    #  file browser
+    {
+      mode = ["n"];
+      key = "<leader>e";
+      action = ":Oil --float<CR>";
+      options = {
+        noremap = true;
+        silent = true;
+        desc = "Open Oil File browser";
+      };
+    }
+
     # easy cmds
     {
       mode = ["n"];
@@ -36,27 +48,6 @@
       options = {
         silent = true;
         desc = "Hop to word";
-      };
-    }
-
-    # nvim-tree triggers
-    {
-      mode = ["n"];
-      key = "<C-n>";
-      action = ":NvimTreeToggle<CR>";
-      options = {
-        noremap = true;
-        silent = true;
-      };
-    }
-    {
-      mode = ["n"];
-      key = "<leader>e";
-      action = ":NvimTreeToggle<CR>";
-      options = {
-        noremap = true;
-        silent = true;
-        desc = "Toggle NvimTree";
       };
     }
 

@@ -12,7 +12,7 @@
     ];
 
     plugins = {
-      bufferline.enable = true;
+      oil.enable = true;
       web-devicons.enable = true;
       nvim-tree.enable = true;
       which-key.enable = true;
@@ -28,6 +28,7 @@
       todo-comments.enable = true;
       smart-splits.enable = true;
       markdown-preview.enable = true;
+      zen-mode.enable = true;
       transparent = {
         enable = true;
         autoLoad = true;

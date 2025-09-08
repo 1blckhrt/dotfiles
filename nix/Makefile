@@ -13,10 +13,9 @@ NIX_PROFILE := $(HOME)/.nix-profile
 nix:
 	@echo "› Ensuring Nix is installed"
 	if ! command -v nix >/dev/null 2>&1; then \
-		echo "Nix not found. Installing determinative Nix..."; \
+		echo "Nix not found. Installing determinate Nix..."; \
 		curl -fsSL https://install.determinate.systems/nix | sh -s -- install --determinate; \
 		echo "✅ Nix installed. Please restart your shell or source your profile:"; \
-		echo "   source $$HOME/.nix-profile/etc/profile.d/nix.sh"; \
 		exit 0; \
 	else \
 		echo "› Nix is already installed."; \
