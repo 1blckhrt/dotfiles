@@ -1,6 +1,5 @@
 _: {
   programs.nixvim.plugins = {
-    lsp-signature.enable = true;
     lsp-format.enable = true;
     lsp-lines.enable = true;
     lsp = {
