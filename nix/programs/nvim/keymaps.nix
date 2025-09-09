@@ -17,16 +17,23 @@
         desc = "Toggle transparency";
       };
     }
-
-    #  file browser
     {
       mode = ["n"];
-      key = "<leader>e";
-      action = ":Oil --float<CR>";
+      key = "<C-n>";
+      action = ":NvimTreeToggle<CR>";
       options = {
         noremap = true;
         silent = true;
-        desc = "Open Oil File browser";
+      };
+    }
+    {
+      mode = ["n"];
+      key = "<leader>e";
+      action = ":NvimTreeToggle<CR>";
+      options = {
+        noremap = true;
+        silent = true;
+        desc = "Toggle NvimTree";
       };
     }
 

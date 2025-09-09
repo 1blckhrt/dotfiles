@@ -12,9 +12,8 @@
     ];
 
     plugins = {
-      oil.enable = true;
-      web-devicons.enable = true;
       nvim-tree.enable = true;
+      web-devicons.enable = true;
       which-key.enable = true;
       render-markdown.enable = true;
       tiny-inline-diagnostic.enable = true;
