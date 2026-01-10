@@ -19,7 +19,7 @@
     stateVersion = "25.11";
     packages = with pkgs; [
       alejandra
-      nerd-fonts.lilex
+      nerd-fonts.geist-mono
       libnotify
     ];
     activation.linkDesktopApplications = {
