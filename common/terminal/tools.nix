@@ -1,0 +1,24 @@
+{pkgs, ...}: {
+  home.packages = with pkgs; [
+    coreutils
+    moreutils
+    eza
+    ripgrep
+    fzf
+    fd
+    bat
+    zoxide
+    btop
+    fastfetch
+    gh
+    gcc
+    zip
+    unzip
+    just
+    wget
+    curl
+    atuin
+    devenv
+    uv
+  ];
+}
