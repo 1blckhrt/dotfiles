@@ -14,10 +14,24 @@
     discord.enable = true;
   };
 
+  nixpkgs.config = {
+    allowUnfree = true;
+    allowUnfreePredicate = pkg: true;
+  };
+
   home = {
     username = "blckhrt";
     homeDirectory = "/home/blckhrt";
     stateVersion = "25.11";
+    sessionPath = [
+      "$HOME/.local/bin"
+      "$HOME/bin"
+    ];
+    sessionVariables = {
+      EDITOR = "nvim";
+      TERMINAL = "kitty";
+      NIXOS_OZONE_WL = "1";
+    };
     packages = with pkgs; [
       alejandra
       nerd-fonts.geist-mono
@@ -30,10 +44,9 @@
       ];
       before = [];
       data = ''
-            rm -rf ${config.xdg.dataHome}/nix-desktop-files/applications
-            mkdir -p ${config.xdg.dataHome}/nix-desktop-files/applications
-            cp -Lr ${config.home.homeDirectory}/.nix-profile/share/applications/* ${config.xdg.dataHome}/nix-desktop-files/applications/
-        chmod +x ${config.xdg.dataHome}/nix-desktop-files/applications/*
+        rm -rf ${config.xdg.dataHome}/nix-desktop-files/applications
+        mkdir -p ${config.xdg.dataHome}/nix-desktop-files/applications
+        cp -Lr ${config.home.homeDirectory}/.nix-profile/share/applications/* ${config.xdg.dataHome}/nix-desktop-files/applications/
       '';
     };
   };
@@ -50,5 +63,8 @@
     enable = true;
     systemDirs.data = ["${config.xdg.dataHome}/nix-desktop-files"];
     mime.enable = true;
+    configFile."environment.d/envvars.conf".text = ''
+      PATH="$HOME/.nix-profile/bin:$PATH"
+    '';
   };
 }
