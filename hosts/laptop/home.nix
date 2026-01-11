@@ -30,14 +30,13 @@
       ];
       before = [];
       data = ''
-        rm -rf ${config.xdg.dataHome}/nix-desktop-files/applications
-        mkdir -p ${config.xdg.dataHome}/nix-desktop-files/applications
-        cp -Lr ${config.home.homeDirectory}/.nix-profile/share/applications/* ${config.xdg.dataHome}/nix-desktop-files/applications/
+            rm -rf ${config.xdg.dataHome}/nix-desktop-files/applications
+            mkdir -p ${config.xdg.dataHome}/nix-desktop-files/applications
+            cp -Lr ${config.home.homeDirectory}/.nix-profile/share/applications/* ${config.xdg.dataHome}/nix-desktop-files/applications/
+        chmod +x ${config.xdg.dataHome}/nix-desktop-files/applications/*
       '';
     };
   };
-
-  systemd.user.sessionVariables.PATH = "$HOME/.nix-profile/bin:$PATH";
 
   programs.home-manager.enable = true;
   targets.genericLinux = {
