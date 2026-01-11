@@ -37,6 +37,8 @@
     };
   };
 
+  systemd.user.sessionVariables.PATH = "$HOME/.nix-profile/bin:$PATH";
+
   programs.home-manager.enable = true;
   targets.genericLinux = {
     enable = true;
