@@ -22,5 +22,7 @@
     uv
     neovim
     nixd
+    gum
+    timewarrior
   ];
 }
