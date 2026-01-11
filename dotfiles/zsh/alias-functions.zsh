@@ -92,3 +92,9 @@ on_chpwd_doc_sync() {
 }
 
 add-zsh-hook chpwd on_chpwd_doc_sync
+
+switch () {
+   /home/blckhrt/bin/nixgit.sh
+   nh home switch /home/blckhrt/dot -H laptop
+}
+

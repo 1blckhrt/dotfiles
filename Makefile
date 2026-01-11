@@ -8,6 +8,6 @@ clean:
 
 .PHONY: switch-shell
 switch-shell:
-	echo "This will ask you for your sudo password. Afterwards, you will need to reboot to have the changes applied."
-	@echo "/home/blckhrt/.nix-profile/bin/zsh" | sudo tee -a /etc/shells
-	@chsh -s $(which zsh)
+	@echo "This will ask you for your sudo password. Afterwards, you will need to reboot to have the changes applied."
+	echo "/home/blckhrt/.nix-profile/bin/zsh" | sudo tee -a /etc/shells
+	chsh --shell /home/blckhrt/.nix-profile/bin/zsh

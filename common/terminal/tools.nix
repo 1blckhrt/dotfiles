@@ -20,5 +20,6 @@
     atuin
     devenv
     uv
+    neovim
   ];
 }
