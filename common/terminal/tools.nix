@@ -24,5 +24,6 @@
     nixd
     gum
     timewarrior
+    nodejs
   ];
 }
