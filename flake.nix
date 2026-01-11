@@ -29,6 +29,11 @@
         inherit pkgs;
         modules = [./hosts/laptop/home.nix];
       };
+
+      pc = home-manager.lib.homeManagerConfiguration {
+        inherit pkgs;
+        modules = [./hosts/pc/home.nix];
+      };
     };
 
     devShells.${system}.default = let

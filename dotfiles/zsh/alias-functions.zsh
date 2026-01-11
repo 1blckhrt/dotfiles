@@ -97,3 +97,8 @@ switch () {
    nh home switch /home/blckhrt/dot -c laptop && \
    /home/blckhrt/bin/nixgit.sh
 }
+
+switch-pc () {
+	nh home switch /home/blckhrt/dot -c pc && \
+	/home/blckhrt/bin/nixgit.sh
+}
