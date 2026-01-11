@@ -6,4 +6,6 @@ eval "$(direnv hook zsh)"
 export EDITOR=nvim
 export VISUAL=$EDITOR
 
+export PATH=$HOME/.local/bin:$PATH
+
 . "$HOME/.nix-profile/etc/profile.d/hm-session-vars.sh"

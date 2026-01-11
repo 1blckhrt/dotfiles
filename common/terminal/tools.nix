@@ -21,5 +21,6 @@
     devenv
     uv
     neovim
+    nixd
   ];
 }
