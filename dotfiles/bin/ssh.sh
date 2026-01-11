@@ -4,7 +4,7 @@ set -euo pipefail
 # Read from SSH config
 HOSTS=$(grep "^Host " ~/.ssh/config | awk '{print $2}' | grep -v "\*")
 
-SELECTED=$(echo "$HOSTS" | gum filter --placeholder "Select server...")
+SELECTED=$(echo "$HOSTS" | gum filter --placeholder "Select host...")
 
 if [ -n "$SELECTED" ]; then
   gum style \
