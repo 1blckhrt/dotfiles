@@ -70,17 +70,5 @@
     enable = true;
     systemDirs.data = ["${config.xdg.dataHome}/nix-desktop-files"];
     mime.enable = true;
-    configFile."systemd/user-environment-generators/05-home-manager.sh" = {
-      text = ''
-        . "${
-          if config.nix.package == null
-          then pkgs.nix
-          else config.nix.package
-        }/etc/profile.d/nix.sh"
-        . "${config.home.profileDirectory}/etc/profile.d/hm-session-vars.sh"
-      '';
-      executable = true;
-      force = true;
-    };
   };
 }

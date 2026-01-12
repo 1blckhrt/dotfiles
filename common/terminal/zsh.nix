@@ -1,12 +1,8 @@
 {pkgs, ...}: {
-  home.packages = with pkgs; [
-    zsh
-  ];
-
-  home.file.".zshrc" = {
-    text = ''
+  programs.zsh = {
+    enable = true;
+    initContent = ''
       source ~/dot/dotfiles/zsh/zsh.zsh
     '';
-    executable = true;
   };
 }
