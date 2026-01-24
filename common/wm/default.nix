@@ -30,7 +30,7 @@
       startup = [
         {command = "--no-startup-id ${pkgs.autotiling-rs}/bin/autotiling-rs";}
         {command = "--no-startup-id ${pkgs.swaybg}/bin/swaybg -i ~/dot/dotfiles/bg.png";}
-        {command = "--no-startup-id ${pkgs.i3status-rust}/bin/i3status-rust";}
+        {command = "--no-startup-id ${pkgs.i3status-rust}/bin/i3status-rs";} # add config
       ];
       keybindings = lib.mkOptionDefault {
         "XF86MonBrightnessDown" = "exec 'brightnessctl s 5%-'";
@@ -40,7 +40,6 @@
         "XF86AudioMute" = "exec 'pactl set-sink-mute @DEFAULT_SINK@ toggle'";
         "${modifier}+Shift+e" = "exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway?' -b 'Yes, exit sway' 'swaymsg exit'";
         "${modifier}+d" = "exec ${pkgs.wmenu}/bin/wmenu-run";
-        "${modifier}+return" = "exec ${pkgs.kitty}/bin/kitty";
         "${modifier}+q" = "kill";
         "${modifier}+Shift+r" = "reload";
         "${modifier}+1" = "workspace number 1";
@@ -55,7 +54,7 @@
     };
     extraConfig = ''
       default_dim_inactive 0.2
-      corner_radius 15
+      corner_radius 5
     '';
   };
 
