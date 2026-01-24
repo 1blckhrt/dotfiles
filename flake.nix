@@ -19,6 +19,11 @@
         home-manager.follows = "home-manager";
       };
     };
+
+    swayalt = {
+      url = "git+https://rad.kludgecs.com/z3GvbEBNDHEM6s8jZYWbrvYrvmBxk.git";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = inputs @ {
