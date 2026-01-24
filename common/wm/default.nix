@@ -19,6 +19,7 @@
     checkConfig = false;
     config = rec {
       modifier = "Mod1";
+      bars = [];
       window = {
         border = 4;
         titlebar = false;
@@ -26,7 +27,11 @@
       terminal = "${pkgs.kitty}/bin/kitty";
       gaps.inner = 20;
       focus.followMouse = true;
-      startup = [{command = "--no-startup-id ${pkgs.autotiling-rs}/bin/autotiling-rs";} {command = "--no-startup-id ${pkgs.swaybg}/bin/swaybg -i ~/dot/dotfiles/bg.png";}];
+      startup = [
+        {command = "--no-startup-id ${pkgs.autotiling-rs}/bin/autotiling-rs";}
+        {command = "--no-startup-id ${pkgs.swaybg}/bin/swaybg -i ~/dot/dotfiles/bg.png";}
+        {command = "--no-startup-id ${pkgs.i3status-rust}/bin/i3status-rust";}
+      ];
       keybindings = lib.mkOptionDefault {
         "XF86MonBrightnessDown" = "exec 'brightnessctl s 5%-'";
         "XF86MonBrightnessUp" = "exec 'brightnessctl s 5%+'";
@@ -34,8 +39,8 @@
         "XF86AudioLowerVolume" = "exec 'pactl set-sink-volume @DEFAULT_SINK@ -2%'";
         "XF86AudioMute" = "exec 'pactl set-sink-mute @DEFAULT_SINK@ toggle'";
         "${modifier}+Shift+e" = "exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway?' -b 'Yes, exit sway' 'swaymsg exit'";
-        "${modifier}+d" = "exec ${pkgs.wmenu}/bin/wmenu-run}";
-        "${modifier}+Enter" = "exec ${pkgs.kitty}/bin/kitty";
+        "${modifier}+d" = "exec ${pkgs.wmenu}/bin/wmenu-run";
+        "${modifier}+enter" = "exec ${pkgs.kitty}/bin/kitty";
         "${modifier}+q" = "kill";
         "${modifier}+Shift+r" = "reload";
         "${modifier}+1" = "workspace number 1";
