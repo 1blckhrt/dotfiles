@@ -9,6 +9,7 @@
     ../../common/desktop-apps/internet/vesktop.nix
     ../../common/terminal/default.nix
     ../../common/scripts/default.nix
+    ../../common/wm/default.nix
     inputs.zen-browser.homeModules.beta
   ];
 
