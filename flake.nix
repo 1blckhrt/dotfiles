@@ -12,12 +12,21 @@
 
     hooks.url = "github:cachix/git-hooks.nix";
     colors.url = "github:misterio77/nix-colors";
+    zen-browser = {
+      url = "github:0xc000022070/zen-browser-flake";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        home-manager.follows = "home-manager";
+      };
+    };
   };
 
-  outputs = {
+  outputs = inputs @ {
     nixpkgs,
     home-manager,
     hooks,
+    colors,
+    zen-browser,
     ...
   }: let
     lib = nixpkgs.lib {inherit lib;};
@@ -28,11 +37,13 @@
       laptop = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
         modules = [./hosts/laptop/home.nix];
+        extraSpecialArgs = {inherit inputs;};
       };
 
       pc = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
         modules = [./hosts/pc/home.nix];
+        extraSpecialArgs = {inherit inputs;};
       };
     };
 

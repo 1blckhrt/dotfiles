@@ -2,12 +2,14 @@
   lib,
   pkgs,
   config,
+  inputs,
   ...
 }: {
   imports = [
     ../../common/desktop-apps/internet/vesktop.nix
     ../../common/terminal/default.nix
     ../../common/scripts/default.nix
+    inputs.zen-browser.homeModules.beta
   ];
 
   modules = {
@@ -52,7 +54,10 @@
     };
   };
 
-  programs.home-manager.enable = true;
+  programs = {
+    home-manager.enable = true;
+    zen-browser.enable = true;
+  };
   targets.genericLinux = {
     enable = true;
     gpu = {
