@@ -40,7 +40,7 @@
         "XF86AudioMute" = "exec 'pactl set-sink-mute @DEFAULT_SINK@ toggle'";
         "${modifier}+Shift+e" = "exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway?' -b 'Yes, exit sway' 'swaymsg exit'";
         "${modifier}+d" = "exec ${pkgs.wmenu}/bin/wmenu-run";
-        "${modifier}+Return" = "exec $terminal";
+        "${modifier}+Return" = "exec ${pkgs.kitty}/bin/kitty";
         "${modifier}+q" = "kill";
         "${modifier}+Shift+r" = "reload";
         "${modifier}+1" = "workspace number 1";
