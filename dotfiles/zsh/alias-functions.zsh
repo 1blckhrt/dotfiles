@@ -4,8 +4,6 @@ notify_fail() {
 	notify-send -u critical "$TITLE" "$MESSAGE"
 }
 
-nv() { if [ "$#" -eq 0 ]; then nvim .; else nvim "$@"; fi; }
-
 tmux-session() {
 	local session sessions fzf_output
 
