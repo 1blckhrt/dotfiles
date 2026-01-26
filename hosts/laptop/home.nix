@@ -53,7 +53,10 @@
     };
   };
 
-  programs.home-manager.enable = true;
+  programs = {
+    home-manager.enable = true;
+    zen-browser.enable = true;
+  };
   targets.genericLinux = {
     enable = true;
     gpu.enable = true;
