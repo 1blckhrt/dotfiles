@@ -2,12 +2,14 @@
   lib,
   pkgs,
   config,
+  inputs,
   ...
 }: {
   imports = [
     ../../common/desktop-apps/internet/vesktop.nix
     ../../common/terminal/default.nix
     ../../common/scripts/default.nix
+    inputs.zen-browser.homeModules.beta
   ];
 
   modules = {
