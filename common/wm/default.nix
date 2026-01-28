@@ -60,9 +60,9 @@
           [
             "Workspaces"
           ]
+          "WindowTitle"
         ];
         center = [
-          "WindowTitle"
           "Clock"
         ];
         right = [
@@ -176,8 +176,6 @@
         sensitivity = 0;
         touchpad.natural_scroll = false;
       };
-
-      gestures.workspace_swipe = false;
 
       device = {
         name = "epic-mouse-v1";
