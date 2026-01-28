@@ -87,6 +87,8 @@
         "systemctl --user restart hyprpolkitagent.service"
         "systemctl --user restart cliphist.service"
         "systemctl --user restart ashell.service"
+        "dbus-update-activation-environment --all"
+        "gnome-keyring-daemon --start --components=secrets"
         "nm-applet --indicator"
       ];
 
