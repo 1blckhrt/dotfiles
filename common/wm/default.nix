@@ -37,19 +37,18 @@
     };
     settings = {
       workspaces = {
-        enableWorkspaceFilling = false;
+        enable_workspace_filling = false;
       };
 
-      windowTitle = {
-        truncateTitleAfterLength = 40;
+      window_title = {
+        truncate_title_after_length = 40;
       };
 
       settings = {
-        lockCmd = "playerctl --all-players pause; hyprlock &";
-        audioSinksMoreCmd = "pavucontrol -t 3";
-        audioSourcesMoreCmd = "pavucontrol -t 4";
-        wifiMoreCmd = "nm-connection-editor";
-        vpnMoreCmd = "nm-connection-editor";
+        lock_cmd = "playerctl --all-players pause; hyprlock &";
+        audio_sinks_more_cmd = "pavucontrol -t 3";
+        audio_sources_more_cmd = "pavucontrol -t 4";
+        wifi_mode_cmd = "nm-connection-editor";
       };
 
       appearance = {
