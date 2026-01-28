@@ -1,65 +1,260 @@
-{
-  pkgs,
-  lib,
-  ...
-}: {
+{pkgs, ...}: {
+  imports = [./hyprpaper.nix ./fuzzel.nix ./wlogout.nix];
   home.packages = with pkgs; [
+    brightnessctl
+    grim
     wl-clipboard
+    slurp
+    snixembed
+    networkmanagerapplet
+    libappindicator-gtk3
+    swaynotificationcenter
+    cliphist
+    pulseaudio
     libnotify
-    wmenu
-    autotiling-rs
-    swaybg
+    pango
+    playerctl
+    nautilus
+    hyprpolkitagent
+    font-awesome
+    nerd-fonts.jetbrains-mono
+    pavucontrol
   ];
 
-  wayland.windowManager.sway = {
-    enable = true;
-    systemd.enable = true;
-    xwayland = true;
-    package = pkgs.swayfx;
-    checkConfig = false;
-    config = rec {
-      modifier = "Mod1";
-      bars = [];
-      window = {
-        border = 4;
-        titlebar = false;
-      };
-      terminal = "${pkgs.kitty}/bin/kitty";
-      gaps.inner = 20;
-      focus.followMouse = true;
-      startup = [
-        {command = "--no-startup-id ${pkgs.autotiling-rs}/bin/autotiling-rs";}
-        {command = "--no-startup-id ${pkgs.swaybg}/bin/swaybg -i ~/dot/dotfiles/bg.png";}
-        {command = "--no-startup-id ${pkgs.i3status-rust}/bin/i3status-rs";} # add config
-      ];
-      keybindings = lib.mkOptionDefault {
-        "XF86MonBrightnessDown" = "exec 'brightnessctl s 5%-'";
-        "XF86MonBrightnessUp" = "exec 'brightnessctl s 5%+'";
-        "XF86AudioRaiseVolume" = "exec 'pactl set-sink-volume @DEFAULT_SINK@ +2%'";
-        "XF86AudioLowerVolume" = "exec 'pactl set-sink-volume @DEFAULT_SINK@ -2%'";
-        "XF86AudioMute" = "exec 'pactl set-sink-mute @DEFAULT_SINK@ toggle'";
-        "${modifier}+Shift+e" = "exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway?' -b 'Yes, exit sway' 'swaymsg exit'";
-        "${modifier}+d" = "exec ${pkgs.wmenu}/bin/wmenu-run";
-        "${modifier}+Return" = "exec ${pkgs.kitty}/bin/kitty";
-        "${modifier}+q" = "kill";
-        "${modifier}+Shift+r" = "reload";
-        "${modifier}+1" = "workspace number 1";
-        "${modifier}+2" = "workspace number 2";
-        "${modifier}+3" = "workspace number 3";
-        "${modifier}+4" = "workspace number 4";
-        "${modifier}+Shift+1" = "move container to workspace number 1";
-        "${modifier}+Shift+2" = "move container to workspace number 2";
-        "${modifier}+Shift+3" = "move container to workspace number 3";
-        "${modifier}+Shift+4" = "move container to workspace number 4";
-      };
-    };
-    extraConfig = ''
-      default_dim_inactive 0.2
-      corner_radius 5
-    '';
+  services = {
+    swaync.enable = true;
+    hyprpolkitagent.enable = true;
+    cliphist.enable = true;
   };
 
-  programs.i3status-rust = {
+  systemd.user.services.snixembed.Unit.After = ["graphical-session.target" "dbus.service"];
+
+  programs.ashell = {
     enable = true;
+    systemd = {
+      enable = true;
+      target = "hyprland-session.target";
+    };
+    settings = {
+      workspaces = {
+        enableWorkspaceFilling = false;
+      };
+
+      windowTitle = {
+        truncateTitleAfterLength = 40;
+      };
+
+      settings = {
+        lockCmd = "playerctl --all-players pause; hyprlock &";
+        audioSinksMoreCmd = "pavucontrol -t 3";
+        audioSourcesMoreCmd = "pavucontrol -t 4";
+        wifiMoreCmd = "nm-connection-editor";
+        vpnMoreCmd = "nm-connection-editor";
+      };
+
+      appearance = {
+        style = "Islands";
+      };
+
+      modules = {
+        left = [
+          [
+            "Workspaces"
+          ]
+        ];
+        center = [
+          "WindowTitle"
+          "Clock"
+        ];
+        right = [
+          "SystemInfo"
+          [
+            "Privacy"
+            "Settings"
+          ]
+        ];
+      };
+    };
+  };
+
+  wayland.windowManager.hyprland = {
+    enable = true;
+    xwayland.enable = true;
+
+    settings = {
+      exec = [
+        "systemctl --user restart hyprpaper.service"
+        "systemctl --user restart xdg-desktop-portal.service"
+        "systemctl --user restart swaync.service"
+        "systemctl --user restart hyprpolkitagent.service"
+        "systemctl --user restart cliphist.service"
+        "systemctl --user restart ashell.service"
+        "nm-applet --indicator"
+      ];
+
+      cursor.no_hardware_cursors = true;
+      monitor = ["HDMI-A-1, preferred, 0x0, auto" "DP-2, preferred, 1920x0, auto"];
+
+      "$terminal" = "${pkgs.kitty}/bin/kitty";
+      "$fileManager" = "${pkgs.nautilus}/bin/nautilus";
+
+      general = {
+        gaps_in = 5;
+        gaps_out = 20;
+        border_size = 2;
+        "col.active_border" = "rgba(88C0D0ff)"; # Nord cyan
+        "col.inactive_border" = "rgba(4C566Aff)"; # Nord dark gray
+        resize_on_border = false;
+        allow_tearing = false;
+        layout = "dwindle";
+      };
+
+      decoration = {
+        rounding = 6;
+        rounding_power = 2;
+        active_opacity = 1.0;
+        inactive_opacity = 0.85;
+
+        shadow = {
+          enabled = true;
+          range = 4;
+          render_power = 3;
+          color = "rgba(2e3440ee)";
+        };
+
+        blur = {
+          enabled = true;
+          size = 3;
+          passes = 2;
+          vibrancy = 0.18;
+        };
+      };
+
+      animations = {
+        enabled = true;
+        bezier = [
+          "easeOutQuint,0.23,1,0.32,1"
+          "easeInOutCubic,0.65,0.05,0.36,1"
+          "linear,0,0,1,1"
+          "almostLinear,0.5,0.5,0.75,1.0"
+          "quick,0.15,0,0.1,1"
+        ];
+
+        animation = [
+          "global, 1, 10, default"
+          "border, 1, 5.39, easeOutQuint"
+          "windows, 1, 4.79, easeOutQuint"
+          "windowsIn, 1, 4.1, easeOutQuint, popin 87%"
+          "windowsOut, 1, 1.49, linear, popin 87%"
+          "fadeIn, 1, 1.73, almostLinear"
+          "fadeOut, 1, 1.46, almostLinear"
+          "fade, 1, 3.03, quick"
+          "layers, 1, 3.81, easeOutQuint"
+          "layersIn, 1, 4, easeOutQuint, fade"
+          "layersOut, 1, 1.5, linear, fade"
+          "fadeLayersIn, 1, 1.79, almostLinear"
+          "fadeLayersOut, 1, 1.39, almostLinear"
+          "workspaces, 1, 1.94, almostLinear, fade"
+          "workspacesIn, 1, 1.21, almostLinear, fade"
+          "workspacesOut, 1, 1.94, almostLinear, fade"
+        ];
+      };
+
+      dwindle = {
+        pseudotile = true;
+        preserve_split = true;
+      };
+
+      master.new_status = "master";
+
+      misc = {
+        force_default_wallpaper = -1;
+        disable_hyprland_logo = false;
+      };
+
+      input = {
+        kb_layout = "us";
+        follow_mouse = 1;
+        sensitivity = 0;
+        touchpad.natural_scroll = false;
+      };
+
+      gestures.workspace_swipe = false;
+
+      device = {
+        name = "epic-mouse-v1";
+        sensitivity = -0.5;
+      };
+
+      "$mainMod" = "SUPER";
+
+      bind = [
+        "$mainMod, Return, exec, $terminal"
+        "$mainMod, D, exec, pkill fuzzel || ${pkgs.fuzzel}/bin/fuzzel"
+        "$mainMod SHIFT, R, exec, hyprctl reload"
+        "$mainMod, Q, killactive,"
+        "$mainMod SHIFT, E, exec, ${pkgs.wlogout}/bin/wlogout"
+        "$mainMod, E, exec, $fileManager"
+        "$mainMod, left, movefocus, l"
+        "$mainMod, right, movefocus, r"
+        "$mainMod, up, movefocus, u"
+        "$mainMod, down, movefocus, d"
+        "$mainMod, 1, workspace, 1"
+        "$mainMod, 2, workspace, 2"
+        "$mainMod, 3, workspace, 3"
+        "$mainMod, 4, workspace, 4"
+        "$mainMod, 5, workspace, 5"
+        "$mainMod, 6, workspace, 6"
+        "$mainMod, 7, workspace, 7"
+        "$mainMod, 8, workspace, 8"
+        "$mainMod, 9, workspace, 9"
+        "$mainMod, 0, workspace, 10"
+        "$mainMod SHIFT, 1, movetoworkspace, 1"
+        "$mainMod SHIFT, 2, movetoworkspace, 2"
+        "$mainMod SHIFT, 3, movetoworkspace, 3"
+        "$mainMod SHIFT, 4, movetoworkspace, 4"
+        "$mainMod SHIFT, 5, movetoworkspace, 5"
+        "$mainMod SHIFT, 6, movetoworkspace, 6"
+        "$mainMod SHIFT, 7, movetoworkspace, 7"
+        "$mainMod SHIFT, 8, movetoworkspace, 8"
+        "$mainMod SHIFT, 9, movetoworkspace, 9"
+        "$mainMod SHIFT, 0, movetoworkspace, 10"
+        "$mainMod, mouse_down, workspace, +1"
+        "$mainMod, mouse_up, workspace, -1"
+      ];
+
+      bindm = [
+        "$mainMod, mouse:272, movewindow"
+        "$mainMod, mouse:273, resizewindow"
+      ];
+
+      bindel = [
+        ",XF86AudioRaiseVolume, exec, wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%+"
+        ",XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"
+        ",XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
+        ",XF86AudioMicMute, exec, wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"
+        ",XF86MonBrightnessUp, exec, brightnessctl set 5%+"
+        ",XF86MonBrightnessDown, exec, brightnessctl set 5%-"
+      ];
+
+      bindl = [
+        ", XF86AudioNext, exec, playerctl next"
+        ", XF86AudioPause, exec, playerctl play-pause"
+        ", XF86AudioPlay, exec, playerctl play-pause"
+        ", XF86AudioPrev, exec, playerctl previous"
+      ];
+
+      windowrule = [
+        "suppressevent maximize, class:.*"
+        "nofocus,class:^$,title:^$,xwayland:1,floating:1,fullscreen:0,pinned:0"
+      ];
+
+      exec-once = [
+        "${pkgs.wl-clipboard}/bin/wl-paste --type text --watch cliphist store"
+        "${pkgs.wl-clipboard}/bin/wl-paste --type image --watch cliphist store"
+      ];
+
+      env = ["XCURSOR_SIZE,20" "HYPRCURSOR_SIZE,20"];
+    };
   };
 }

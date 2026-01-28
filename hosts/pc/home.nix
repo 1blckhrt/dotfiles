@@ -1,5 +1,4 @@
 {
-  lib,
   pkgs,
   config,
   inputs,
@@ -10,12 +9,14 @@
     ../../common/terminal/default.nix
     ../../common/scripts/default.nix
     ../../common/wm/default.nix
-    inputs.zen-browser.homeModules.beta
+    inputs.colors.homeManagerModules.default
   ];
 
   modules = {
     discord.enable = true;
   };
+
+  colorScheme = inputs.colors.colorSchemes.nord;
 
   nixpkgs.config = {
     allowUnfree = true;
@@ -55,10 +56,8 @@
     };
   };
 
-  programs = {
-    home-manager.enable = true;
-    zen-browser.enable = true;
-  };
+  programs.home-manager.enable = true;
+
   targets.genericLinux = {
     enable = true;
     gpu = {

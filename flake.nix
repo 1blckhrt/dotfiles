@@ -12,13 +12,6 @@
 
     hooks.url = "github:cachix/git-hooks.nix";
     colors.url = "github:misterio77/nix-colors";
-    zen-browser = {
-      url = "github:0xc000022070/zen-browser-flake";
-      inputs = {
-        nixpkgs.follows = "nixpkgs";
-        home-manager.follows = "home-manager";
-      };
-    };
   };
 
   outputs = inputs @ {
@@ -26,10 +19,8 @@
     home-manager,
     hooks,
     colors,
-    zen-browser,
     ...
   }: let
-    lib = nixpkgs.lib {inherit lib;};
     system = "x86_64-linux";
     pkgs = import nixpkgs {inherit system;};
   in {
