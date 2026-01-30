@@ -16,3 +16,5 @@ precmd() {
 	source ~/dot/dotfiles/zsh/aliases.zsh
 	source ~/dot/dotfiles/zsh/alias-functions.zsh
 }
+
+clear
