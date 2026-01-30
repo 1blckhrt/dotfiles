@@ -21,9 +21,9 @@
     devenv
     uv
     neovim
-    nixd
     gum
     timewarrior
     nodejs
+    nix-prefetch-github
   ];
 }
