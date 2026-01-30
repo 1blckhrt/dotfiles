@@ -9,8 +9,8 @@ python3Packages.buildPythonApplication {
   src = fetchFromGitHub {
     owner = "1blckhrt";
     repo = "commit";
-    rev = "5d469c694676d4767b3d9565d9cb08cf497c34ba";
-    hash = "sha256-5bUtdDsmn7vGCGdnOEmU8WkqFpfmsSWYqh0sQPDoEGI=";
+    rev = "ba6fd1a2304d68796a688f73426f9408150e008c";
+    hash = "sha256-7qVsOW0Ypn9Yle5poFUpKy3PFbHft7vTvcHrtkGjA3c=";
   };
 
   format = "pyproject";
