@@ -3,7 +3,7 @@ _: {
     enable = true;
     settings = {
       preload = ["~/dot/dotfiles/bg2.jpg"];
-      wallpaper = [", ~/dot/dotfiles/bg2"];
+      wallpaper = [", ~/dot/dotfiles/bg2.jpg"];
     };
   };
 }
